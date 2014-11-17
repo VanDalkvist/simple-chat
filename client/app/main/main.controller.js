@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('simpleChatApp')
-    .controller('MainCtrl', function ($scope, $http, $resource, socket) {
+    .controller('MainCtrl', function ($scope, $http, $resource, socket, currentUser) {
         $scope.messages = [];
 
         var Message = $resource('/api/messages/:id');
@@ -14,10 +14,8 @@ angular.module('simpleChatApp')
             if (newMessage === '') {
                 return;
             }
-            var message = {text: newMessage, createdAt: moment().toDate()};
-            Message.save(message, function () {
-                $scope.messages.push(message);
-            });
+            var message = {text: newMessage, createdAt: moment().toDate(), author: currentUser.name};
+            Message.save(message);
             $scope.newMessage = '';
         };
 

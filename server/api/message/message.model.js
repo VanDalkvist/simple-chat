@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 
 var MessageSchema = new Schema({
     text: String,
-    createdAt: {type: Date, index: {expires: '7d'}}
+    createdAt: {type: Date, index: {expires: '7d'}},
+    author: String
 });
 
 function init() {

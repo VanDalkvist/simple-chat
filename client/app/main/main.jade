@@ -1,26 +1,45 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-header#banner.hero-unit
-    .container
-        h1 'Allo, 'Allo!
-        p.lead Kick-start your next web app with Angular Fullstack
-        img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
-
 .container
     .row
-        .col-lg-12
-            h1.page-header Messages:
-            ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='message in messages')
-                li {{message.text}} {{message.createdAt}}
-                    //button.close(type='button', ng-click='deletemessage(message)') ×
+        .panel.panel-primary
+            #accordion.panel-heading
+                span.glyphicon.glyphicon-comment
+                .btn-group.pull-right
+                    a.btn.btn-default.btn-xs(type='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne')
+                        span.glyphicon.glyphicon-chevron-down
 
-    form.message-form
-        p.input-group
-            input.form-control(type='text', placeholder='Add a new message here..', ng-model='newMessage')
-            span.input-group-btn
-                button.btn.btn-primary(type='submit', ng-click='addMessage(newMessage)') Add New
+            #collapseOne.panel-collapse
+                .panel-body
+                    ul.chat(ng-repeat='message in messages')
+                        li.left.clearfix(ng-if="getCurrentUser().name === message.author")
+                            span.chat-img.pull-left
+                                img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=ME', alt='User Avatar')
+                            .chat-body.clearfix
+                                .header
+                                    .primary-font {{message.author}}
+                                    small.pull-right.text-muted
+                                        span.glyphicon.glyphicon-time
+                                        label(am-time-ago="message.createdAt")
+                                p {{message.text}}
+                        li.right.clearfix(ng-if="getCurrentUser().name !== message.author")
+                            span.chat-img.pull-right
+                                img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=YOU', alt='User Avatar')
+                            .chat-body.clearfix
+                                .header
+                                    small.text-muted
+                                        span.glyphicon.glyphicon-time
+                                        label(am-time-ago="message.createdAt")
+                                    .pull-right.primary-font {{message.author}}
+                                p {{message.text}}
+                .panel-footer
+                    .input-group
+                        input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage')
+                        span.input-group-btn
+                            button#btn-chat.btn.btn-warning.btn-sm(type='submit', ng-click='addMessage(newMessage)')
+                                | Send
 
-footer.footer
+footer.footer.navbar.navbar-fixed-bottom
     .container
         p
             | Angular Fullstack Chat

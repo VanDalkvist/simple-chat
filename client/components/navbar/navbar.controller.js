@@ -1,21 +1,21 @@
 'use strict';
 
 angular.module('simpleChatApp')
-    .controller('NavbarCtrl', function ($scope, $location, Auth) {
+    .controller('NavbarCtrl', function ($rootScope, $location, Auth) {
 
-        $scope.menu = [{'title': 'Home', 'link': '/'}];
+        $rootScope.menu = [{'title': 'Home', 'link': '/'}];
 
-        $scope.isCollapsed = true;
-        $scope.isLoggedIn = Auth.isLoggedIn;
-        $scope.isAdmin = Auth.isAdmin;
-        $scope.getCurrentUser = Auth.getCurrentUser;
+        $rootScope.isCollapsed = true;
+        $rootScope.isLoggedIn = Auth.isLoggedIn;
+        $rootScope.isAdmin = Auth.isAdmin;
+        $rootScope.getCurrentUser = Auth.getCurrentUser;
 
-        $scope.logout = function () {
+        $rootScope.logout = function () {
             Auth.logout();
             $location.path('/login');
         };
 
-        $scope.isActive = function (route) {
+        $rootScope.isActive = function (route) {
             return route === $location.path();
         };
     });
