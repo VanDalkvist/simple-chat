@@ -16,7 +16,11 @@ mongoose.connect(config.mongo.uri, config.mongo.options);
 
 // Populate DB with sample data
 if (config.seedDB) {
-    require('./config/local.seed');
+    require('./config/seed.js').local();
+}
+
+if (config.env === 'production') {
+    require('./config/seed.js').prod();
 }
 
 // Setup server

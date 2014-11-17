@@ -32,11 +32,11 @@ div(ng-include='"components/navbar/navbar.html"')
                                         label(am-time-ago="message.createdAt")
                                     .pull-right.primary-font {{message.author}}
                                 p {{message.text}}
-                .panel-footer
+                form.panel-footer(ng-submit="addMessage(newMessage)")
                     .input-group
                         input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage')
                         span.input-group-btn
-                            button#btn-chat.btn.btn-warning.btn-sm(type='submit', ng-click='addMessage(newMessage)')
+                            button#btn-chat.btn.btn-warning.btn-sm(type='submit')
                                 | Send
 
 footer.footer.navbar.navbar-fixed-bottom
