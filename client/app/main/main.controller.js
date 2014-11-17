@@ -1,27 +1,27 @@
 'use strict';
 
 angular.module('simpleChatApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+    .controller('MainCtrl', function ($scope, $http, $resource, socket) {
+        $scope.messages = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
+        var Message = $resource('/api/messages/:id');
+
+        $scope.messages = Message.query(function () {
+            socket.syncUpdates('message', $scope.messages);
+        });
+
+        $scope.addMessage = function (newMessage) {
+            if (newMessage === '') {
+                return;
+            }
+            var message = {text: newMessage, createdAt: moment().toDate()};
+            Message.save(message, function () {
+                $scope.messages.push(message);
+            });
+            $scope.newMessage = '';
+        };
+
+        $scope.$on('$destroy', function () {
+            socket.unsyncUpdates('message');
+        });
     });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
-  });
