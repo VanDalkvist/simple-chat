@@ -1,3 +1,6 @@
+
+//require('https').globalAgent.options.rejectUnauthorized = false;
+
 'use strict';
 
 angular.module('simpleChatApp', [
