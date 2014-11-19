@@ -2,18 +2,17 @@
 'use strict';
 
 angular.module('simpleChatApp')
-    .factory('socket', function (socketFactory) {
+    .factory('socket', function ($location, socketFactory) {
 
         // socket.io now auto-configures its connection when we omit a connection url
         var ioSocket = io('', {
             // Send auth token on connection, you will need to DI the Auth service above
             // 'query': 'token=' + Auth.getToken()
-            path: '/socket.io-client',
-            secure: true
+            path: '/socket.io-client'
         });
 
         var socket = socketFactory({
-            ioSocket: io.connect('https://127.0.0.1/socket.io-client', {secure: true})
+            ioSocket: ioSocket
         });
 
         return {

@@ -69,7 +69,7 @@
 
 .panel-body {
     overflow-y: scroll;
-    height: 550px;
+    height: 100%;
 }
 
 .container {
@@ -78,9 +78,4 @@
     height: 100%;
     /* Negative indent footer by it's height */
     margin: 0 auto -60px;
-}
-
-.footer {
-    height: 60px;
-    display: block;
 }

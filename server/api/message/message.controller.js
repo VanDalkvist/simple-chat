@@ -14,7 +14,7 @@ var Message = require('./message.model');
 
 // Get list of messages
 exports.index = function (req, res) {
-    Message.find(function (err, messages) {
+    Message.find({}, {}, {sort: {'createdAt': -1}, limit: 200}, function (err, messages) {
         if (err) {
             return handleError(res, err);
         }

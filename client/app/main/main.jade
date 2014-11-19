@@ -3,15 +3,18 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
     .row
         .panel.panel-primary
-            #accordion.panel-heading
+            .panel-heading
                 span.glyphicon.glyphicon-comment
-                .btn-group.pull-right
-                    a.btn.btn-default.btn-xs(type='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne')
-                        span.glyphicon.glyphicon-chevron-down
 
-            #collapseOne.panel-collapse
+            .panel-collapse
+                form.panel-footer(ng-submit="addMessage(newMessage)")
+                    .input-group
+                        input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage')
+                        span.input-group-btn
+                            button#btn-chat.btn.btn-warning.btn-sm(type='submit')
+                                | Send
                 .panel-body
-                    ul.chat(ng-repeat='message in messages')
+                    ul.chat(ng-repeat='message in messages | orderBy:"-createdAt"')
                         li.left.clearfix(ng-if="getCurrentUser().name === message.author")
                             span.chat-img.pull-left
                                 img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=ME', alt='User Avatar')
@@ -32,14 +35,3 @@ div(ng-include='"components/navbar/navbar.html"')
                                         label(am-time-ago="message.createdAt")
                                     .pull-right.primary-font {{message.author}}
                                 p {{message.text}}
-                form.panel-footer(ng-submit="addMessage(newMessage)")
-                    .input-group
-                        input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage')
-                        span.input-group-btn
-                            button#btn-chat.btn.btn-warning.btn-sm(type='submit')
-                                | Send
-
-footer.footer.navbar.navbar-fixed-bottom
-    .container
-        p
-            | Angular Fullstack Chat
