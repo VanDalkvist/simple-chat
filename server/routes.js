@@ -9,6 +9,15 @@ var errors = require('./components/errors');
 module.exports = function (app) {
 
     // Insert routes below
+
+    app.use(function noCache(req, res, next) {
+        // added no-cache header for stupid IE;
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", 0);
+        next();
+    });
+
     app.use('/api/messages', require('./api/message'));
     app.use('/api/users', require('./api/user'));
 
