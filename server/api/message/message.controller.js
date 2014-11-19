@@ -11,10 +11,13 @@
 
 var _ = require('lodash');
 var Message = require('./message.model');
+var moment = require('moment');
 
 // Get list of messages
 exports.index = function (req, res) {
-    Message.find({}, {}, {sort: {'createdAt': -1}, limit: 200}, function (err, messages) {
+    var query = {createdAt: {"$gte": moment().startOf('day').toDate()}};
+    var options = {sort: {'createdAt': -1}, limit: 200};
+    Message.find(query, {}, options, function (err, messages) {
         if (err) {
             return handleError(res, err);
         }
