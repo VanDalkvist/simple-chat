@@ -7,9 +7,9 @@ div(ng-include='"components/navbar/navbar.html"')
                 span.glyphicon.glyphicon-comment
 
             .panel-collapse
-                form.panel-footer(ng-submit="addMessage(newMessage)")
-                    .input-group
-                        input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage')
+                .panel-footer
+                    form.input-group(ng-submit="addMessage(newMessage); $broadcast('form:change');")
+                        input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage', focus-on='form:change')
                         span.input-group-btn
                             button#btn-chat.btn.btn-warning.btn-sm(type='submit')
                                 | Send
