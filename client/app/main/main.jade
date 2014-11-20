@@ -14,6 +14,7 @@ div(ng-include='"components/navbar/navbar.html"')
                             button#btn-chat.btn.btn-warning.btn-sm(type='submit')
                                 | Send
                 .panel-body
+                    p(ng-if='!!messages && !messages.length') There are no messages
                     ul.chat(ng-repeat='message in messages | orderBy:"-createdAt"')
                         li.left.clearfix(ng-if="getCurrentUser().name === message.author")
                             span.chat-img.pull-left

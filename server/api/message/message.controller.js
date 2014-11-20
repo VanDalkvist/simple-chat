@@ -88,6 +88,15 @@ exports.destroy = function (req, res) {
     });
 };
 
+exports.removeAll = function (req, res) {
+    Message.find().remove(function (err) {
+        if (err) {
+            return handleError(res, err);
+        }
+        return res.send(200);
+    });
+};
+
 function handleError(res, err) {
     return res.send(500, err);
 }
