@@ -21,12 +21,15 @@ div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl')
                 li(ng-if='!isLoggedIn()', ng-class='{active: isActive("/login")}')
                     a(href='/login') Login
 
-                li(ng-if='isLoggedIn()')
-                    p.navbar-text Hello {{ getCurrentUser().name }}
+                li(class="user-info", ng-if='isLoggedIn()')
+                    p.navbar-text
+                        | Hello
+                        a(href='/settings')
+                            |  {{ getCurrentUser().name }}
 
                 li(ng-if='isLoggedIn()', ng-class='{active: isActive("/settings")}')
                     a(href='/settings')
                         span.glyphicon.glyphicon-cog
 
-                li(ng-if='isLoggedIn()', ng-class='{active: isActive("/logout")}')
+                li(ng-if='isLoggedIn()', ng-class='{active: isActive("/logout")}', style="padding-right: 25px;")
                     a(href='', ng-click='logout()') Logout

@@ -1,7 +1,5 @@
 div(ng-include='"components/navbar/navbar.html"')
-.container
-    p
-        | The delete user and user index api routes are restricted to users with the 'admin' role.
+.container-fluid
 
     button.btn.btn.btn-warning(type='button', ng-click='removeAll()') Remove All Messages
     p(ng-if='!!message') {{message}}

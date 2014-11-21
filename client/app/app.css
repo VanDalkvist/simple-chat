@@ -1,4 +1,3 @@
-
 /**
  * Bootstrap Fonts
  */
@@ -38,35 +37,15 @@
     padding: 0.2em 0;
 }
 
-.chat {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+/* take all available height*/
+body, html, .container-fluid, div[ui-view] {
+    height: 100%;
 }
 
-.chat li {
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #B3A9A9;
+body {
+    height: 90%;
 }
 
-.chat li.left .chat-body {
-    margin-left: 60px;
-}
-
-.chat li.right .chat-body {
-    margin-right: 60px;
-}
-
-.chat li .chat-body p {
-    margin: 0;
-    color: #777777;
-}
-
-.panel-body {
-    overflow-y: scroll;
-}
-
-.container {
+.container-fluid {
     margin: 55px auto 0;
 }

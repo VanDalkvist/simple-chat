@@ -1,6 +1,6 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.container
+.container-fluid
     .panel.panel-primary
         .panel-heading
             form.input-group(ng-submit="addMessage(newMessage); $broadcast('form:change');")
@@ -16,10 +16,10 @@ div(ng-include='"components/navbar/navbar.html"')
                         img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=ME', alt='User Avatar')
                     .chat-body.clearfix
                         .header
-                            .primary-font {{message.author}}
                             small.pull-right.text-muted
                                 span.glyphicon.glyphicon-time
                                 label(am-time-ago="message.createdAt")
+                            .primary-font {{message.author}}
                         p {{message.text}}
                 li.right.clearfix(ng-if="getCurrentUser().name !== message.author")
                     span.chat-img.pull-right
