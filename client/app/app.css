@@ -63,18 +63,10 @@
     color: #777777;
 }
 
-.panel .slidedown .glyphicon, .chat .glyphicon {
-    margin-right: 5px;
-}
-
 .panel-body {
-    height: 100%;
+    overflow-y: scroll;
 }
 
 .container {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-    margin: 0 auto -60px;
+    margin: 55px auto 0;
 }
