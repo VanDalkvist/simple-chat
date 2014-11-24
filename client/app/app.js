@@ -7,7 +7,8 @@ angular.module('simpleChatApp', [
     'btford.socket-io',
     'ui.router',
     'ui.bootstrap',
-    'angularMoment'
+    'angularMoment',
+    'emoji'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider

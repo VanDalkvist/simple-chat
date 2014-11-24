@@ -20,7 +20,7 @@ div(ng-include='"components/navbar/navbar.html"')
                                 span.glyphicon.glyphicon-time
                                 label(am-time-ago="message.createdAt")
                             .primary-font {{message.author}}
-                        p {{message.text}}
+                        p(ng-bind-html="message.text | emoji")
                 li.right.clearfix(ng-if="getCurrentUser().name !== message.author")
                     span.chat-img.pull-right
                         img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=YOU', alt='User Avatar')
@@ -30,4 +30,4 @@ div(ng-include='"components/navbar/navbar.html"')
                                 span.glyphicon.glyphicon-time
                                 label(am-time-ago="message.createdAt")
                             .pull-right.primary-font {{message.author}}
-                        p {{message.text}}
+                        p(ng-bind-html="message.text | emoji")
