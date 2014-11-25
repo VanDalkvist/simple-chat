@@ -10,24 +10,6 @@ div(ng-include='"components/navbar/navbar.html"')
                         | Send
         .panel-body
             p(ng-if='!!messages && !messages.length') There are no messages
-            ul.chat(ng-repeat='message in messages | orderBy:"-createdAt"')
-                li.left.clearfix(ng-if="getCurrentUser().name === message.author")
-                    span.chat-img.pull-left
-                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=ME', alt='User Avatar')
-                    .chat-body.clearfix
-                        .header
-                            small.pull-right.text-muted
-                                span.glyphicon.glyphicon-time
-                                label(am-time-ago="message.createdAt")
-                            .primary-font {{message.author}}
-                        p(ng-bind-html="message.text | emoji")
-                li.right.clearfix(ng-if="getCurrentUser().name !== message.author")
-                    span.chat-img.pull-right
-                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=YOU', alt='User Avatar')
-                    .chat-body.clearfix
-                        .header
-                            small.text-muted
-                                span.glyphicon.glyphicon-time
-                                label(am-time-ago="message.createdAt")
-                            .pull-right.primary-font {{message.author}}
-                        p(ng-bind-html="message.text | emoji")
+            ul.chat
+                li.clearfix(ng-repeat='message in messages | orderBy:"-createdAt"', ng-class="{'left': isAuthor(message), 'right': !isAuthor(message)}")
+                    message-view(message="message")

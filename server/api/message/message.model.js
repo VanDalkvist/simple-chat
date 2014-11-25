@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var MessageSchema = new Schema({
     text: String,
     createdAt: {type: Date, index: {expires: '7d'}},
-    author: String
+    author: {type: Schema.Types.Mixed}
 });
 
 function init() {

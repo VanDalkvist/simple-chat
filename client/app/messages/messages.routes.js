@@ -6,7 +6,7 @@ angular.module('simpleChatApp')
             .state('main', {
                 url: '/',
                 templateUrl: 'app/main/main.html',
-                controller: 'MainCtrl',
+                controller: 'MessagesCtrl',
                 resolve: {
                     currentUser: ['Auth', function (Auth) {
                         return Auth.getCurrentUser();
