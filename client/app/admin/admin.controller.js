@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('simpleChatApp')
-    .controller('AdminCtrl', function ($scope, $http, $resource, $timeout, Auth, User) {
+    .controller('AdminCtrl', function ($scope, $http, $resource, $timeout, Auth, User, Messages) {
 
         // Use the User $resource to fetch all users
         $scope.users = User.query();
@@ -16,8 +16,7 @@ angular.module('simpleChatApp')
         };
 
         $scope.removeAll = function () {
-            var Message = $resource('/api/messages/:id');
-            Message.delete(function (response) {
+            Messages.delete(function (response) {
                 $scope.message = 'Remove was been successful.';
                 $timeout(function () {
                     $scope.message = '';
