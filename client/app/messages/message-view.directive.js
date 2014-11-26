@@ -20,7 +20,7 @@
         // #region private functions
 
         function _link(scope) {
-            var url = 'http://placehold.it/50/';
+            var url = 'https://placehold.it/50/';
 
             scope.$watch('message', function (value) {
                 value.url = url + (value.isAuthor ? '55C1E7' : 'FA6F57') + '/fff&text=' + (value.isAuthor ? 'ME' : 'YOU');
