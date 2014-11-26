@@ -1,29 +1,30 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: MessagesCtrl', function () {
 
     // load the controller's module
     beforeEach(module('simpleChatApp'));
     beforeEach(module('socketMock'));
 
-    var MainCtrl,
+    var MessagesCtrl,
         scope,
         $httpBackend;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
         $httpBackend = _$httpBackend_;
-        $httpBackend.expectGET('/api/things')
+
+        $httpBackend.when('GET', '/api/messages')
             .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
         scope = $rootScope.$new();
-        MainCtrl = $controller('MainCtrl', {
-            $scope: scope
+        MessagesCtrl = $controller('MessagesCtrl', {
+            $scope: scope, currentUser: {email: 'email'}
         });
     }));
 
-    it('should attach a list of things to the scope', function () {
+    it('should attach a list of messages to the scope', function () {
         $httpBackend.flush();
-        expect(scope.awesomeThings.length).toBe(4);
+        expect(scope.messages.length).toBe(4);
     });
 });
