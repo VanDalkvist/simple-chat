@@ -11,5 +11,5 @@ div(ng-include='"components/navbar/navbar.html"')
         .panel-body
             p(ng-if='!!messages && !messages.length') There are no messages
             ul.chat
-                li.clearfix(ng-repeat='message in messages | orderBy:"-createdAt"', ng-class="{'left': isAuthor(message), 'right': !isAuthor(message)}")
+                li.clearfix(ng-repeat='message in messages', ng-class="{'left': isAuthor(message), 'right': !isAuthor(message)}")
                     message-view(message="message")
