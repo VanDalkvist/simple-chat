@@ -4,7 +4,7 @@ div(ng-include='"components/navbar/navbar.html"')
     .panel.panel-primary
         .panel-heading
             form.input-group(ng-submit="addMessage(newMessage); $broadcast('form:change');")
-                input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage', focus-on='form:change')
+                input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage', focus-on='form:change', typeahead="emoj for emoj in emojis | filter:$viewValue", typeahead-template-url="app/messages/emoji-template.html")
                 span.input-group-btn
                     button#btn-chat.btn.btn-warning.btn-sm(type='submit')
                         | Send
