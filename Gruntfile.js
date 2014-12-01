@@ -360,6 +360,11 @@ module.exports = function (grunt) {
                     src: ['generated/*']
                 }, {
                     expand: true,
+                    cwd: '<%= yeoman.client %>/bower_components/angular-emojis/dist',
+                    dest: '<%= yeoman.dist %>/public/app',
+                    src: ['*.png']
+                }, {
+                    expand: true,
                     dest: '<%= yeoman.dist %>',
                     src: [
                         'package.json',
