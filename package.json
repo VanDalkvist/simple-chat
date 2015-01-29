@@ -1,7 +1,7 @@
 {
-    "name": "simple-chat",
+    "name": "simple-talk",
     "version": "0.0.6-1",
-    "subdomain": "simple-chat",
+    "subdomain": "simple-talk",
     "main": "server/app.js",
     "dependencies": {
         "body-parser": "^1.9.2",

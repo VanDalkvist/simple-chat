@@ -368,6 +368,7 @@ module.exports = function (grunt) {
                     dest: '<%= yeoman.dist %>',
                     src: [
                         'package.json',
+                        'Procfile',
                         'server/**/*'
                     ]
                 }]
@@ -405,10 +406,10 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up the build process
         concurrent: {
             server: [
-                'jade',
+                'jade'
             ],
             test: [
-                'jade',
+                'jade'
             ],
             debug: {
                 tasks: [
@@ -524,7 +525,7 @@ module.exports = function (grunt) {
                     ]
                 }
             }
-        },
+        }
     });
 
     // Used for delaying livereload until after server has restarted
@@ -638,7 +639,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'newer:jshint',
+        //'newer:jshint',
         'test',
         'build'
     ]);
