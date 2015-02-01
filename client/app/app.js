@@ -9,7 +9,8 @@ angular.module('simpleChatApp', [
     'ui.bootstrap',
     'angularMoment',
     'emoji',
-    'ui.bootstrap.typeahead'
+    'ui.bootstrap.typeahead',
+    'ngMaterial'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/');
