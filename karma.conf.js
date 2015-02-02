@@ -23,6 +23,10 @@ module.exports = function (config) {
             'client/bower_components/lodash/dist/lodash.compat.js',
             'client/bower_components/angular-socket-io/socket.js',
             'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+            'client/bower_components/angular-material/angular-material.js',
+            'client/bower_components/angular-animate/angular-animate.js',
+            'client/bower_components/angular-aria/angular-aria.js',
+            'client/bower_components/hammer.js/hammer.js',
             'client/app/app.js',
             'client/app/**/*.js',
             'client/app/**/*.coffee',
@@ -52,7 +56,7 @@ module.exports = function (config) {
         exclude: [],
 
         // web server port
-        port: 8080,
+        port: 7999,
 
         // level of logging
         // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
