@@ -21,7 +21,7 @@ exports.index = function (req, res) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(200, messages);
+        return res.json(messages);
     });
 };
 
@@ -32,7 +32,7 @@ exports.show = function (req, res) {
             return handleError(res, err);
         }
         if (!message) {
-            return res.send(404);
+            return res.status(404).end();
         }
         return res.json(message);
     });
@@ -44,7 +44,7 @@ exports.create = function (req, res) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(201, message);
+        return res.status(201).json(message);
     });
 };
 
@@ -58,14 +58,14 @@ exports.update = function (req, res) {
             return handleError(res, err);
         }
         if (!message) {
-            return res.send(404);
+            return res.status(404).end();
         }
         var updated = _.merge(message, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.json(200, message);
+            return res.json(message);
         });
     });
 };
@@ -77,13 +77,13 @@ exports.destroy = function (req, res) {
             return handleError(res, err);
         }
         if (!message) {
-            return res.send(404);
+            return res.status(404).end();
         }
         message.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.send(204);
+            return res.status(204).end();
         });
     });
 };
@@ -93,7 +93,7 @@ exports.removeAll = function (req, res) {
         if (err) {
             return handleError(res, err);
         }
-        return res.send(200);
+        return res.status(200).end();
     });
 };
 

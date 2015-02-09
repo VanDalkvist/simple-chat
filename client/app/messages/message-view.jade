@@ -3,16 +3,7 @@ span.chat-img(ng-class="{'pull-left': message.isAuthor, 'pull-right': !message.i
 .chat-body.clearfix
     md-item-content
         .md-tile-content
-            h3(ng-bind-html="message.text | emoji")
             small.text-muted(ng-class="{'pull-right': message.isAuthor}")
                 span.glyphicon.glyphicon-time
                 label(am-time-ago="message.createdAt")
-            //h4 {{message.author.name}}
-            //p
-            //    | {{item.notes}}
-    //.header
-    //    small.text-muted(ng-class="{'pull-right': message.isAuthor}")
-    //        span.glyphicon.glyphicon-time
-    //        label(am-time-ago="message.createdAt")
-    //    div(ng-class="{'pull-right': !message.isAuthor}").primary-font {{message.author.name}}
-    //p(ng-bind-html="message.text | emoji")
+            h3(ng-bind-html="message.text | emoji")
