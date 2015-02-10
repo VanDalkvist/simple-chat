@@ -10,7 +10,7 @@ angular.module('simple-chat.app')
                 resolve: {
                     currentUser: ['$location', 'Auth', function ($location, Auth) {
                         var currentUser = Auth.getCurrentUser();
-                        if (currentUser) return $location.path('/');
+                        if (!_.isEmpty(currentUser)) return $location.path('/');
                         return undefined;
                     }]
                 }

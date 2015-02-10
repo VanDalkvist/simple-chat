@@ -1,10 +1,14 @@
-.panel-heading
-    form.input-group(ng-submit="addMessage(newMessage); $broadcast('form:change');")
-        input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage', focus-on='form:change', typeahead="emoj for emoj in emojis | filter:$viewValue", typeahead-template-url="app/messages/emoji-template.html")
-        span.input-group-btn
-            button#btn-chat.btn.btn-warning.btn-sm(type='submit')
-                | Send
-.panel-body
+md-content
+    form(ng-submit="addMessage(newMessage); $broadcast('form:change');", layout="row")
+        span.chat-img.pull-left
+            img.img-circle(ng-src='https://placehold.it/50/55C1E7/fff&text=ME', alt='{{message.author.name}}')
+        md-input-container(flex='')
+            label Type your message here...
+            input(ng-model='newMessage', focus-on='form:change', typeahead="emoj for emoj in emojis | filter:$viewValue", typeahead-template-url="app/messages/emoji-template.html")
+        //input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage', focus-on='form:change', typeahead="emoj for emoj in emojis | filter:$viewValue", typeahead-template-url="app/messages/emoji-template.html")
+        md-input-container(flex='10')
+            md-button.md-raised.md-warn(type='submit') Send
+
     p(ng-if='!!messages && !messages.length') There are no messages
     md-list
         md-item(ng-repeat='message in messages', ng-class="{'left': isAuthor(message), 'right': !isAuthor(message)}")
