@@ -3,7 +3,7 @@
 describe('Controller: MessagesCtrl', function () {
 
     // load the controller's module
-    beforeEach(module('simpleChatApp'));
+    beforeEach(module('simple-chat.app'));
     beforeEach(module('socketMock'));
 
     var MessagesCtrl,

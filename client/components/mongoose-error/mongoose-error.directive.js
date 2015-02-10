@@ -3,7 +3,7 @@
 /**
  * Removes server error when user updates input
  */
-angular.module('simpleChatApp')
+angular.module('simple-chat.app')
   .directive('mongooseError', function () {
     return {
       restrict: 'A',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('simpleChatApp')
+angular.module('simple-chat.app')
   .factory('Modal', function ($rootScope, $modal) {
     /**
      * Opens a modal

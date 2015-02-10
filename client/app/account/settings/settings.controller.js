@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('simpleChatApp')
+angular.module('simple-chat.app')
     .controller('SettingsCtrl', function ($scope, User, Auth) {
         $scope.errors = {};
 

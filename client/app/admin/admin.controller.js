@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('simpleChatApp')
+angular.module('simple-chat.app')
     .controller('AdminCtrl', function ($scope, $http, $resource, $timeout, Auth, User, Messages) {
 
         // Use the User $resource to fetch all users

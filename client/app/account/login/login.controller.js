@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('simpleChatApp')
+angular.module('simple-chat.app')
     .controller('LoginCtrl', function ($scope, Auth, $location) {
         $scope.user = {};
         $scope.errors = {};

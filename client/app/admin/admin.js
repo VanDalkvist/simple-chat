@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('simpleChatApp')
+angular.module('simple-chat.app')
     .config(function ($stateProvider) {
         $stateProvider
             .state('admin', {

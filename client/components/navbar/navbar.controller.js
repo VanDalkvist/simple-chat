@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('simpleChatApp')
+    angular.module('simple-chat.app')
         .controller('NavbarCtrl', function ($rootScope, $location, Auth) {
 
             $rootScope.menu = [{'title': 'Home', 'link': '/'}];

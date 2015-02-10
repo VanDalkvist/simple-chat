@@ -1,7 +1,7 @@
 /* global io */
 'use strict';
 
-angular.module('simpleChatApp')
+angular.module('simple-chat.app')
     .factory('socket', function ($location, socketFactory, Auth) {
 
         // socket.io now auto-configures its connection when we omit a connection url

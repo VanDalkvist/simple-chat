@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('simpleChatApp')
+    angular.module('simple-chat.app')
         .directive('messageView', messageViewDirective);
 
     messageViewDirective.$inject = [];

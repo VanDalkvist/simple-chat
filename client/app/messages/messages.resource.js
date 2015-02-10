@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('simpleChatApp')
+    angular.module('simple-chat.app')
         .factory('Messages', Messages);
 
     Messages.$inject = ['$resource'];
