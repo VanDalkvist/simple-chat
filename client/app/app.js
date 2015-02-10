@@ -12,11 +12,13 @@ angular.module('simple-chat.app', [
     'ui.bootstrap.typeahead',
     'ngMaterial'
 ])
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
         $urlRouterProvider.otherwise('/');
 
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('authInterceptor');
+
+        $mdThemingProvider.theme('indigo');
     })
     .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
         return {

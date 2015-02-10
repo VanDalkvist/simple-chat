@@ -1,22 +1,20 @@
 'use strict';
 
 angular.module('simple-chat.app')
-    .controller('LoginCtrl', function ($scope, Auth, $location) {
+    .controller('LoginCtrl', function ($scope, Auth, $location, currentUser) {
+        $scope.login = _login;
         $scope.user = {};
         $scope.errors = {};
 
-        $scope.login = function (form) {
+        function _login(form) {
             $scope.submitted = true;
 
-            if (form.$valid) {
-                Auth.login({
-                    email: $scope.user.email,
-                    password: $scope.user.password
-                }).then(function () {
-                    $location.path('/');
-                }).catch(function (err) {
-                    $scope.errors.other = err.message;
-                });
-            }
-        };
+            if (!form.$valid) return;
+
+            Auth.login({email: $scope.user.email, password: $scope.user.password}).then(function () {
+                $location.path('/');
+            }, function (err) {
+                $scope.errors.other = err.message;
+            });
+        }
     });

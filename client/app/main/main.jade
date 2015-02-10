@@ -1,17 +1,7 @@
-div(ng-include='"components/navbar/navbar.html"')
+md-content(md-theme='indigo')
 
-.container-fluid
-    .panel.panel-primary
-        .panel-heading
-            form.input-group(ng-submit="addMessage(newMessage); $broadcast('form:change');")
-                input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...', ng-model='newMessage', focus-on='form:change', typeahead="emoj for emoj in emojis | filter:$viewValue", typeahead-template-url="app/messages/emoji-template.html")
-                span.input-group-btn
-                    button#btn-chat.btn.btn-warning.btn-sm(type='submit')
-                        | Send
-        .panel-body
-            p(ng-if='!!messages && !messages.length') There are no messages
-            md-content
-                md-list
-                    md-item(ng-repeat='message in messages', ng-class="{'left': isAuthor(message), 'right': !isAuthor(message)}")
-                        message-view(message="message")
+    div(ng-controller='NavigationCtrl')
+        include(view="'components/navigation/header.html'")
+        include(view="'components/navigation/sidebar.html'")
 
+    div(style='padding-top: 80px;', flex='', ui-view='content')

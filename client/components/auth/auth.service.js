@@ -14,11 +14,9 @@
                  * Authenticate user and save token
                  *
                  * @param  {Object}   user     - login info
-                 * @param  {Function} callback - optional
                  * @return {Promise}
                  */
-                login: function (user, callback) {
-                    var cb = callback || angular.noop;
+                login: function (user) {
                     var deferred = $q.defer();
 
                     $http.post('/auth/local', {
@@ -29,12 +27,10 @@
                             $cookieStore.put('token', data.token);
                             currentUser = User.get();
                             deferred.resolve(data);
-                            return cb();
                         }).
                         error(function (err) {
                             this.logout();
                             deferred.reject(err);
-                            return cb(err);
                         }.bind(this));
 
                     return deferred.promise;
@@ -55,20 +51,13 @@
                  *
                  * @param  {String}   oldPassword
                  * @param  {String}   newPassword
-                 * @param  {Function} callback    - optional
                  * @return {Promise}
                  */
-                changePassword: function (oldPassword, newPassword, callback) {
-                    var cb = callback || angular.noop;
-
-                    return User.changePassword({id: currentUser._id}, {
-                        oldPassword: oldPassword,
-                        newPassword: newPassword
-                    }, function (user) {
-                        return cb(user);
-                    }, function (err) {
-                        return cb(err);
-                    }).$promise;
+                changePassword: function (oldPassword, newPassword) {
+                    return User.changePassword(
+                        {id: currentUser._id},
+                        {oldPassword: oldPassword, newPassword: newPassword}
+                    ).$promise;
                 },
 
                 /**

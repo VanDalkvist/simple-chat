@@ -2,9 +2,8 @@
     'use strict';
 
     angular.module('simple-chat.app')
-        .controller('NavbarCtrl', function ($rootScope, $location, Auth) {
-
-            $rootScope.menu = [{'title': 'Home', 'link': '/'}];
+        .controller('MainCtrl', function ($rootScope, $location, $state, Auth) {
+            $rootScope.state = $state;
 
             $rootScope.isCollapsed = true;
             $rootScope.isLoggedIn = Auth.isLoggedIn;
