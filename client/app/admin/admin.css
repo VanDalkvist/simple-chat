@@ -1,3 +1,8 @@
 .trash {
-    color: rgb(209, 91, 71);
+    /*color: rgb(209, 91, 71);*/
+    margin-top: 10px;
+}
+
+.remove-messages {
+    margin: 0 auto;
 }

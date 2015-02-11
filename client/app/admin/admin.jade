@@ -1,11 +1,13 @@
-.container-fluid
-    button.btn.btn.btn-warning(type='button', ng-click='removeAll()') Remove All Messages
-    p(ng-if='!!message') {{message}}
+md-content.md-padding(layout='column')
+    md-button.remove-messages.md-raised.md-warn(type='button', ng-click='removeAll()') Remove All Messages
 
-    ul.list-group
-        li.list-group-item(ng-repeat='user in users')
-            strong {{user.name}}
-            br
-            span.text-muted {{user.email}}
-            a.trash(ng-click='delete(user)')
-                span.glyphicon.glyphicon-trash.pull-right
+    md-list
+        md-item(ng-repeat='user in users')
+            md-item-content
+                .md-tile-content
+                    div.pull-left
+                        h3
+                            strong {{user.name}}
+                        h4.text-muted {{user.email}}
+                    a.trash.pull-right(ng-click='delete(user)')
+                        i.fa.fa-trash-o

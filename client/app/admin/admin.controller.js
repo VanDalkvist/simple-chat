@@ -1,31 +1,35 @@
 'use strict';
 
 angular.module('simple-chat.app')
-    .controller('AdminCtrl', function ($scope, $http, $resource, $timeout, Auth, User, Messages) {
+    .controller('AdminCtrl', function ($scope, $mdToast, User, Messages) {
 
-        // Use the User $resource to fetch all users
         $scope.users = User.query();
+        $scope.delete = _delete;
+        $scope.removeAll = _removeAll;
 
-        $scope.delete = function (user) {
+        function _delete(user) {
             User.remove({id: user._id});
             angular.forEach($scope.users, function (u, i) {
                 if (u === user) {
                     $scope.users.splice(i, 1);
                 }
             });
-        };
+        }
 
-        $scope.removeAll = function () {
+        function _removeAll() {
             Messages.delete(function (response) {
-                $scope.message = 'Remove was been successful.';
-                $timeout(function () {
-                    $scope.message = '';
-                }, 4000);
+                _showNotification('All messages was removed.');
             }, function (response) {
-                $scope.message = 'Error does occur. Remove was been unsuccessful.';
-                $timeout(function () {
-                    $scope.message = '';
-                }, 4000);
+                _showNotification('Error does occur during removing messages.');
             });
-        };
+        }
+
+        function _showNotification(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .content(message)
+                    .position('bottom right')
+                    .hideDelay(3000)
+            );
+        }
     });
