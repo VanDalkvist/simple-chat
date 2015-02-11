@@ -4,13 +4,13 @@ md-content.settings.md-padding(layout='column')
     form(name='form', ng-submit="changePassword(form)", layout="row")
         md-input-container(flex)
             label Current Password
-            input(type='password', ng-model='user.oldPassword', autocomplete='off', mongoose-error='')
+            input(type='password', ng-model='user.oldPassword', autocomplete='off', db-error)
             p.help-block(ng-show='form.password.$error.mongoose')
                 | {{ errors.other }}
 
         md-input-container(flex)
             label New Password
-            input(type='password', ng-model='user.newPassword', autocomplete='off', ng-minlength='3', required, mongoose-error)
+            input(type='password', ng-model='user.newPassword', autocomplete='off', ng-minlength='3', required, db-error)
             p.help-block(ng-show='(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)')
                 | Password must be at least 3 characters.
 

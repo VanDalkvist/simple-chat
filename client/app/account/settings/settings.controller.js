@@ -12,7 +12,7 @@ angular.module('simple-chat.app')
                 .then(function () {
                     $scope.message = 'Password successfully changed.';
                 }, function () {
-                    form.password.$setValidity('mongoose', false);
+                    form.password.$setValidity('db', false);
                     $scope.errors.other = 'Incorrect password';
                     $scope.message = '';
                 });
