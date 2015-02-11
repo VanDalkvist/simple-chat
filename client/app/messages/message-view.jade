@@ -6,5 +6,5 @@ md-item-content
         small.text-muted(ng-class="{'pull-right': message.isAuthor}")
             i.fa.fa-clock-o
             | &nbsp
-            label(am-time-ago="message.createdAt")
+            label.time(am-time-ago="message.createdAt")
         h3(ng-bind-html="message.text | emoji")

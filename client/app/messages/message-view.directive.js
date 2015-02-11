@@ -22,8 +22,9 @@
         function _link(scope) {
             var url = 'https://placehold.it/50/';
 
+            var meColor = '3f51b5';
             scope.$watch('message', function (value) {
-                value.url = url + (value.isAuthor ? '55C1E7' : 'FA6F57') + '/fff&text=' + (value.isAuthor ? 'ME' : 'YOU');
+                value.url = url + (value.isAuthor ? meColor : 'FA6F57') + '/fff&text=' + (value.isAuthor ? 'ME' : 'YOU');
             });
         }
     }

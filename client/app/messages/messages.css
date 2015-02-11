@@ -24,6 +24,14 @@ md-content.messages {
     padding-top: 80px;
 }
 
+message-view > md-item-content > .md-tile-content > .text-muted > .time {
+    color: #3f51b5;
+}
+
+message-view > .chat-img > img {
+    opacity: 0.8;
+}
+
 .chat {
     list-style: none;
     margin: 0;
