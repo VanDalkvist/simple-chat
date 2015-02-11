@@ -7,9 +7,7 @@
 
 var User = require('../api/user/user.model');
 
-
 function _local() {
-
     User.find({}).remove(function () {
         User.create({
                 provider: 'local',
@@ -30,11 +28,6 @@ function _local() {
 }
 
 function _prod() {
-
 }
 
-
-module.exports = {
-    local: _local,
-    prod: _prod
-};
+module.exports = { local: _local, prod: _prod };
