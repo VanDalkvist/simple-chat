@@ -1,7 +1,6 @@
-md-content(md-theme='indigo')
-
+md-content
     div(ng-controller='NavigationCtrl')
-        include(view="'components/navigation/header.html'")
-        include(view="'components/navigation/sidebar.html'")
+        include(view="'app/navigation/header.html'")
+        include(view="'app/navigation/sidebar.html'")
 
-    div(style='padding-top: 80px;', flex='', ui-view='content')
+    div(style='padding-top: 65px;', flex='', ui-view='content')

@@ -1,13 +1,23 @@
 md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left')
     div(ng-click='$mdSidenav("left").close();')
         md-toolbar(md-theme='indigo')
-            h1.md-toolbar-tools Management
-        md-content
+            h1.md-toolbar-tools
+                i.fa.fa-cog.fa-spin.fa-fw
+                | &nbsp Management
+        md-content(layout='column')
             a.menu-item.menu-sub-item.md-menu-item(ui-sref='home', md-highlight='state.current.name == "main"', md-ink-ripple='#bbb', ng-if='isLoggedIn()')
-                span Home
+                span
+                    i.fa.fa-home
+                    | &nbsp Home
             a.menu-item.menu-sub-item.md-menu-item(ui-sref='settings', md-highlight='state.current.name == "settings"', md-ink-ripple='#bbb', ng-if='isLoggedIn()')
-                span Change password
+                span
+                    i.fa.fa-cogs
+                    | &nbsp Change password
             a.menu-item.menu-sub-item.md-menu-item(ui-sref='admin', md-highlight='state.current.name == "admin"', md-ink-ripple='#bbb', ng-if='isAdmin()')
-                span Admin
+                span
+                    i.fa.fa-database
+                    | &nbsp Admin
             a.menu-item.menu-sub-item.md-menu-item(ng-click='logout()', md-ink-ripple='#bbb', ng-if='isLoggedIn()')
-                span Logout
+                span
+                    i.fa.fa-sign-out
+                    | &nbsp Logout

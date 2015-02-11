@@ -1,3 +1,29 @@
+
+md-toolbar.messages {
+    top: 65px;
+    background-color: #ffffff;
+}
+
+md-toolbar.messages > form.new-message > md-input-container {
+    padding-bottom: 5px;
+}
+
+md-toolbar.messages > form.new-message > md-input-container input {
+    width: 100%;
+}
+
+md-toolbar.messages > form.new-message > md-input-container.text {
+    width: 100%;
+}
+
+md-toolbar.messages > form.new-message > md-input-container.submit {
+    display: list-item;
+}
+
+md-content.messages {
+    padding-top: 80px;
+}
+
 .chat {
     list-style: none;
     margin: 0;

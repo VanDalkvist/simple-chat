@@ -1,14 +1,23 @@
 /* app css stylesheet */
+
+/* take all available height*/
+body, html, .container-fluid, div[ui-view] {
+    height: 100%;
+}
+
 body {
     height: none;
     background-color: #E7E7E7;
+}
+
+md-content {
+    height: 100%;
 }
 
 .box {
     width: 200px;
     height: 200px;
     background-color: yellow;
-
 }
 
 .fix-top {
@@ -39,6 +48,10 @@ md-whiteframe {
     background: #fff;
     margin: 20px;
     padding: 20px;
+}
+
+md-toolbar.app-toolbar > .md-toolbar-tools {
+    padding: 0;
 }
 
 .check {
@@ -82,21 +95,24 @@ core-tooltip.fancy:focus::shadow .core-tooltip {
 
 .md-subheader {
     background-color: #dcedc8;
-
 }
+
 h2.md-subheader {
     margin: 0px;
     margin-left: -24px;
     margin-right: -24px;
-    margin-top: -24px; }
+    margin-top: -24px;
+}
+
 h2.md-subheader.md-sticky-clone {
     margin-right: 0px;
     margin-top: 0px;
-    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16); }
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16);
+}
+
 h2 .md-subheader-content {
-    padding-left: 10px; }
-
-
+    padding-left: 10px;
+}
 
 md-backdrop {
     position: fixed !important;
@@ -127,7 +143,7 @@ md-tooltip {
     opacity: 1;
     margin: 0;
     outline: none;
-    padding: 0px 28px;
+    padding: 0px 20px;
     position: relative;
     text-align: left;
     text-decoration: none;
