@@ -1,17 +1,4 @@
-.panel {
-    height: 100%;
-    overflow: hidden;
-    margin-bottom: 0 !important;
-}
 
-.panel-body {
-    overflow-y: scroll;
-    height: 94%;
-}
-
-.listdemoBasicUsage .face {
-    border-radius: 30px;
-    border: 1px solid #ddd;
-    width: 48px;
-    margin: 16px;
+md-content > [ui-view='content'] {
+    padding-top: 65px;
 }

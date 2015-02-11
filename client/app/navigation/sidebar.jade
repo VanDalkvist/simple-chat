@@ -7,12 +7,12 @@ md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left')
         md-content(layout='column')
             a.menu-item.menu-sub-item.md-menu-item(ui-sref='home', md-highlight='state.current.name == "main"', md-ink-ripple='#bbb', ng-if='isLoggedIn()')
                 span
-                    i.fa.fa-home
-                    | &nbsp Home
+                    i.fa.fa-pencil
+                    | &nbsp Talk
             a.menu-item.menu-sub-item.md-menu-item(ui-sref='settings', md-highlight='state.current.name == "settings"', md-ink-ripple='#bbb', ng-if='isLoggedIn()')
                 span
-                    i.fa.fa-cogs
-                    | &nbsp Change password
+                    i.fa.fa-sliders
+                    | &nbsp Settings
             a.menu-item.menu-sub-item.md-menu-item(ui-sref='admin', md-highlight='state.current.name == "admin"', md-ink-ripple='#bbb', ng-if='isAdmin()')
                 span
                     i.fa.fa-database

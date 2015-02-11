@@ -1,0 +1,7 @@
+md-content.settings, md-content.settings > form {
+    width: 100%;
+}
+
+md-content.settings > form > button[type='submit'] {
+    margin: 25px 10px;
+}

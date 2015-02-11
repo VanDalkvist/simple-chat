@@ -4,6 +4,7 @@ span.chat-img(ng-class="{'pull-left': message.isAuthor, 'pull-right': !message.i
 md-item-content
     .md-tile-content
         small.text-muted(ng-class="{'pull-right': message.isAuthor}")
-            i.icon-time
+            i.fa.fa-clock-o
+            | &nbsp
             label(am-time-ago="message.createdAt")
         h3(ng-bind-html="message.text | emoji")
