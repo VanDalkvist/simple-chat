@@ -55,6 +55,12 @@ module.exports = function (grunt) {
             }
         },
         watch: {
+            ngtemplates: {
+                files: [
+                    '.tmp/{app,components}/**/*.html'
+                ],
+                tasks: ['ngtemplates']
+            },
             injectJS: {
                 files: [
                     '<%= yeoman.client %>/{app,components}/**/*.js',
@@ -83,8 +89,8 @@ module.exports = function (grunt) {
             },
             jade: {
                 files: [
-                    '<%= yeoman.client %>/{app,components}/*',
-                    '<%= yeoman.client %>/{app,components}/**/*.jade'],
+                    '<%= yeoman.client %>/{app,components}/**/*.jade'
+                ],
                 tasks: ['jade']
             },
             gruntfile: {
