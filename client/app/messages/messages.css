@@ -66,3 +66,7 @@ li.user-info {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.atwho-view {
+    width: auto;
+}

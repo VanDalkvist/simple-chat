@@ -27,7 +27,7 @@ angular.module('simple-chat.app').run(['$templateCache', function ($templateCach
 
 
     $templateCache.put('app/messages/emoji-template.html',
-        "<a><span bind-html-unsafe=\"match.label | typeaheadHighlight:query\"></span><span ng-bind-html=\"match.label | emoji\"></span></a>"
+        "<li><i title=\":&quot; + ${name} + &quot;:\" class=\"emoji emoji_${name}\">&nbsp</i><span>&nbsp ${name}</span></li>"
     );
 
 
@@ -37,7 +37,7 @@ angular.module('simple-chat.app').run(['$templateCache', function ($templateCach
 
 
     $templateCache.put('app/messages/messages.html',
-        "<md-toolbar class=\"messages md-whiteframe-z2 fix-top\"><form ng-submit=\"addMessage(newMessage); $broadcast('form:change');\" layout=row class=new-message><md-input-container class=text><label>Type your message here...</label><!--input(ng-model='newMessage', focus-on='form:change', typeahead=\"emoj for emoj in emojis | filter:$viewValue\", typeahead-template-url=\"app/messages/emoji-template.html\", autocomplete='off')--><input ng-model=newMessage focus-on=form:change autocomplete=off sc-autocomplete=emojis sc-at=\":\"></md-input-container><md-input-container class=submit><md-button type=submit aria-label=Submit ng-disabled=!newMessage class=\"md-primary md-hue-1\"><i class=\"fa fa-paper-plane-o\"></i></md-button></md-input-container></form></md-toolbar><md-content class=\"messages md-padding\"><p ng-if=\"!!messages &amp;&amp; !messages.length\">There are no messages</p><md-list><md-item ng-repeat=\"message in messages\" ng-class=\"{'left': isAuthor(message), 'right': !isAuthor(message)}\"><message-view message=message></message-view></md-item></md-list></md-content>"
+        "<md-toolbar class=\"messages md-whiteframe-z2 fix-top\"><form ng-submit=\"addMessage(newMessage); $broadcast('form:change');\" layout=row class=new-message><md-input-container class=text><label>Type your message here...</label><input ng-model=newMessage focus-on=form:change autocomplete=off st-autocomplete=emojis st-at=: st-template=\"app/messages/emoji-template.html\"></md-input-container><md-input-container class=submit><md-button type=submit aria-label=Submit ng-disabled=!newMessage class=\"md-primary md-hue-1\"><i class=\"fa fa-paper-plane-o\"></i></md-button></md-input-container></form></md-toolbar><md-content class=\"messages md-padding\"><p ng-if=\"!!messages &amp;&amp; !messages.length\">There are no messages</p><md-list><md-item ng-repeat=\"message in messages\" ng-class=\"{'left': isAuthor(message), 'right': !isAuthor(message)}\"><message-view message=message></message-view></md-item></md-list></md-content>"
     );
 
 

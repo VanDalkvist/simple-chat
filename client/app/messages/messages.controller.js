@@ -11,7 +11,9 @@
         // #region init
 
         var author = {name: currentUser.name, email: currentUser.email};
-        $scope.emojis = emojis.values;
+        $scope.emojis = emojis.values.map(function (emoji) {
+            return {name: emoji.substr(1, emoji.length - 2)};
+        });
 
         // #region scope
 

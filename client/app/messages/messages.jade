@@ -2,7 +2,7 @@ md-toolbar.messages.md-whiteframe-z2.fix-top
     form.new-message(ng-submit="addMessage(newMessage); $broadcast('form:change');", layout="row")
         md-input-container.text
             label Type your message here...
-            input(ng-model='newMessage', focus-on='form:change', typeahead="emoj for emoj in emojis | filter:$viewValue", typeahead-template-url="app/messages/emoji-template.html", autocomplete='off')
+            input(ng-model='newMessage', focus-on='form:change', autocomplete='off', st-autocomplete='emojis', st-at=':', st-template="app/messages/emoji-template.html")
         md-input-container.submit
             md-button.md-primary.md-hue-1(type='submit', aria-label='Submit', ng-disabled='!newMessage')
                 i.fa.fa-paper-plane-o
