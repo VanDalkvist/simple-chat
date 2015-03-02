@@ -2,10 +2,13 @@
     'use strict';
 
     angular.module('simple-chat.app')
-        .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+        .factory('Auth', function Auth($location, $rootScope, $http, $log, $cookieStore, $q, User) {
             var currentUser = {};
             if ($cookieStore.get('token')) {
-                currentUser = User.get();
+                $log.log("Auth: Token was not found. Try to load user info.");
+                currentUser = User.get(function () {
+                    $log.log("Auth: Current user was loaded.");
+                });
             }
 
             return {
@@ -25,11 +28,15 @@
                     }).
                         success(function (data) {
                             $cookieStore.put('token', data.token);
-                            currentUser = User.get();
+                            $log.log("Auth - login: Success login.");
+                            currentUser = User.get(function () {
+                                $log.log("Auth - login: Current user was loaded.");
+                            });
                             deferred.resolve(data);
                         }).
                         error(function (err) {
                             this.logout();
+                            $log.log("Auth - login: Failure login.");
                             deferred.reject(err);
                         }.bind(this));
 
@@ -43,6 +50,7 @@
                  */
                 logout: function () {
                     $cookieStore.remove('token');
+                    $log.log("Auth - logout: Reset user. Remove token.");
                     currentUser = {};
                 },
 
@@ -84,13 +92,17 @@
                 isLoggedInAsync: function (cb) {
                     if (currentUser.hasOwnProperty('$promise')) {
                         currentUser.$promise.then(function () {
+                            $log.log("Auth - isLoggedInAsync - by promise: You are logged in.");
                             cb(true);
                         }).catch(function () {
+                            $log.log("Auth - isLoggedInAsync - by promise: You are not logged in.");
                             cb(false);
                         });
                     } else if (currentUser.hasOwnProperty('role')) {
+                        $log.log("Auth - isLoggedInAsync - by role: You are logged in.");
                         cb(true);
                     } else {
+                        $log.log("Auth - isLoggedInAsync - by role: You are not logged in.");
                         cb(false);
                     }
                 },

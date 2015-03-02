@@ -20,13 +20,15 @@ angular.module('simple-chat.app', [
 
         $mdThemingProvider.theme('indigo');
     })
-    .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
+    .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location, $log) {
         return {
             // Add authorization token to headers
             request: function (config) {
                 config.headers = config.headers || {};
                 if ($cookieStore.get('token')) {
                     config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+                } else {
+                    $log.log("request: Token was not found in cookies.");
                 }
                 return config;
             },
@@ -36,18 +38,31 @@ angular.module('simple-chat.app', [
                 if (response.status === 401) {
                     // remove any stale tokens
                     $cookieStore.remove('token');
+                    $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
                     $location.path('/login');
                 }
                 return $q.reject(response);
             }
         };
     })
-    .run(function ($rootScope, $location, Auth) {
-        // Redirect to login if route requires auth and you're not logged in
+    .constant('States', (function () {
+        return {
+            directRoutes: ['login']
+        };
+    })())
+    .run(function ($rootScope, $log, $state, Auth, States) {
+        $log.log("app - run: Subscribe to $stateChangeStart.");
+
         $rootScope.$on('$stateChangeStart', function (event, next) {
             Auth.isLoggedInAsync(function (loggedIn) {
+                $log.log("$stateChangeStart: Next is ", next);
+
+                //if (_.includes(States.directRoutes, next.name)) return;
+
                 if (next.authenticate && !loggedIn) {
-                    $location.path('/login');
+                    //event.preventDefault();
+                    $log.log("$stateChangeStart: You are not logged in. Redirect to login page.");
+                    $state.go('login');
                 }
             });
         });

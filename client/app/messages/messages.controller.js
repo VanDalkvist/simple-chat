@@ -5,12 +5,14 @@
     angular.module('simple-chat.app')
         .controller('MessagesCtrl', MessagesCtrl);
 
-    MessagesCtrl.$inject = ['$scope', 'socket', 'currentUser', 'Messages', 'emojis'];
+    MessagesCtrl.$inject = ['$scope', '$log', 'socket', 'currentUser', 'Messages', 'emojis'];
 
-    function MessagesCtrl($scope, socket, currentUser, Messages, emojis) {
+    function MessagesCtrl($scope, $log, socket, currentUser, Messages, emojis) {
+        $log.log("MessagesCtrl - init. Current user is ", currentUser);
+
         // #region init
 
-        var author = {name: currentUser.name, email: currentUser.email};
+        var author = currentUser && {name: currentUser.name, email: currentUser.email};
         $scope.emojis = emojis.values.map(function (emoji) {
             return {name: emoji.substr(1, emoji.length - 2)};
         });

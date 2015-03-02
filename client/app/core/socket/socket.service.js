@@ -2,9 +2,11 @@
 'use strict';
 
 angular.module('simple-chat.app')
-    .factory('socket', function ($location, socketFactory, Auth) {
+    .factory('socket', function ($location, $log, socketFactory, Auth) {
 
         // socket.io now auto-configures its connection when we omit a connection url
+
+        $log.log("socket - init");
         var ioSocket = io('', {
             query: 'token=' + Auth.getToken(),
             path: '/socket.io-client'
