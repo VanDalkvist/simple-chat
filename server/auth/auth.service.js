@@ -1,13 +1,16 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var passport = require('passport');
 var config = require('../config/environment');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
 var validateJwt = expressJwt({secret: config.secrets.session});
+
+exports.isAuthenticated = isAuthenticated;
+exports.hasRole = hasRole;
+exports.signToken = signToken;
+exports.setTokenCookie = setTokenCookie;
 
 /**
  * Attaches the user object to the request if authenticated
@@ -70,8 +73,3 @@ function setTokenCookie(req, res) {
     res.cookie('token', JSON.stringify(token));
     res.redirect('/');
 }
-
-exports.isAuthenticated = isAuthenticated;
-exports.hasRole = hasRole;
-exports.signToken = signToken;
-exports.setTokenCookie = setTokenCookie;
