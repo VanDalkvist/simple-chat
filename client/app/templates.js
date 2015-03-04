@@ -21,13 +21,18 @@ angular.module('simple-chat.app').run(['$templateCache', function ($templateCach
     );
 
 
-    $templateCache.put('app/main/main.html',
-        "<md-content><div ng-controller=NavigationCtrl><include view=\"'app/navigation/header.html'\"></include><include view=\"'app/navigation/sidebar.html'\"></include></div><div flex=flex ui-view=content></div></md-content>"
+    $templateCache.put('app/emojis/emoji-template.html',
+        "<li><i title=\":&quot; + ${name} + &quot;:\" class=\"emoji emoji_${name}\">&nbsp</i><span>&nbsp ${name}</span></li>"
     );
 
 
-    $templateCache.put('app/messages/emoji-template.html',
-        "<li><i title=\":&quot; + ${name} + &quot;:\" class=\"emoji emoji_${name}\">&nbsp</i><span>&nbsp ${name}</span></li>"
+    $templateCache.put('app/emojis/emojis.html',
+        "<md-content flex=flex><md-grid-list md-cols-sm=2 md-cols-md=4 md-cols-gt-md=9 md-row-height-gt-md=1:1 md-row-height=16:9 md-gutter=8px md-gutter-gt-sm=4px class=gridListdemoDynamicTiles><md-grid-tile ng-repeat=\"emoji in emojis\" md-rowspan={{tile.span.row}} md-colspan={{tile.span.col}} ng-class=tile.background><md-icon ng-bind-html=\"emoji.view | emoji\" aria-label=Emoji></md-icon><h3>{{emoji.name}}</h3></md-grid-tile></md-grid-list></md-content>"
+    );
+
+
+    $templateCache.put('app/main/main.html',
+        "<md-content><div ng-controller=NavigationCtrl><include view=\"'app/navigation/header.html'\"></include><include view=\"'app/navigation/sidebar.html'\"></include></div><div flex=flex ui-view=content></div></md-content>"
     );
 
 
@@ -37,7 +42,7 @@ angular.module('simple-chat.app').run(['$templateCache', function ($templateCach
 
 
     $templateCache.put('app/messages/messages.html',
-        "<md-toolbar class=\"messages md-whiteframe-z2 fix-top\"><form ng-submit=\"addMessage(newMessage); $broadcast('form:change');\" layout=row class=new-message><md-input-container class=text><label>Type your message here...</label><input ng-model=newMessage focus-on=form:change autocomplete=off st-autocomplete=emojis st-at=: st-template=\"app/messages/emoji-template.html\"></md-input-container><md-input-container class=submit><md-button type=submit aria-label=Submit ng-disabled=!newMessage class=\"md-primary md-hue-1\"><i class=\"fa fa-paper-plane-o\"></i></md-button></md-input-container></form></md-toolbar><md-content class=\"messages md-padding\"><p ng-if=\"!!messages &amp;&amp; !messages.length\">There are no messages</p><md-list><md-item ng-repeat=\"message in messages\" ng-class=\"{'left': isAuthor(message), 'right': !isAuthor(message)}\"><message-view message=message></message-view></md-item></md-list></md-content>"
+        "<md-toolbar class=\"messages md-whiteframe-z2 fix-top\"><form ng-submit=\"addMessage(newMessage); $broadcast('form:change');\" layout=row class=new-message><md-input-container class=text><label>Type your message here...</label><input ng-model=newMessage focus-on=form:change autocomplete=off st-autocomplete=emojis st-at=: st-template=\"app/emojis/emoji-template.html\"></md-input-container><md-input-container class=submit><md-button aria-label=Smiles ng-click=openEmojisDialog($event) class=\"md-primary md-hue-1\"><i class=\"fa fa-smile-o\"></i></md-button><md-button type=submit aria-label=Submit ng-disabled=!newMessage class=\"md-primary md-hue-1\"><i class=\"fa fa-paper-plane-o\"></i></md-button></md-input-container></form></md-toolbar><md-content class=\"messages md-padding\"><p ng-if=\"!!messages &amp;&amp; !messages.length\">There are no messages</p><md-list><md-item ng-repeat=\"message in messages\" ng-class=\"{'left': isAuthor(message), 'right': !isAuthor(message)}\"><message-view message=message></message-view></md-item></md-list></md-content>"
     );
 
 
