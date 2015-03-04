@@ -16,8 +16,8 @@ md-toolbar.messages > form.new-message > md-input-container.text {
     width: 100%;
 }
 
-md-toolbar.messages > form.new-message > md-input-container.submit {
-    display: list-item;
+md-toolbar.messages > form.new-message > md-input-container.submit > md-button {
+    padding: 0;
 }
 
 md-content.messages {
