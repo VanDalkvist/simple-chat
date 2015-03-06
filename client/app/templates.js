@@ -37,7 +37,7 @@ angular.module('simple-chat.app').run(['$templateCache', function ($templateCach
 
 
     $templateCache.put('app/messages/message-view.html',
-        "<span ng-class=\"{'pull-left': message.isAuthor, 'pull-right': !message.isAuthor}\" class=chat-img><img ng-src={{message.url}} alt={{message.author.name}} class=\"img-circle\"></span><md-item-content><div class=md-tile-content><small ng-class=\"{'pull-right': message.isAuthor}\" class=text-muted><i class=\"fa fa-clock-o\"></i>&nbsp<label am-time-ago=message.createdAt class=time></label></small><h3 ng-bind-html=\"message.text | emoji\"></h3></div></md-item-content>"
+        "<span ng-class=\"::{'pull-left': message.isAuthor, 'pull-right': !message.isAuthor}\" class=chat-img><img ng-src={{::message.url}} alt={{::message.author.name}} class=\"img-circle\"></span><md-item-content><div class=md-tile-content><small ng-class=\"::{'pull-right': message.isAuthor}\" class=text-muted><i class=\"fa fa-clock-o\"></i>&nbsp<label am-time-ago=message.createdAt class=time></label></small><h3 ng-bind-html=\"::message.text | emoji\"></h3></div></md-item-content>"
     );
 
 

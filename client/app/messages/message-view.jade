@@ -1,10 +1,10 @@
-span.chat-img(ng-class="{'pull-left': message.isAuthor, 'pull-right': !message.isAuthor}")
-    img.img-circle(ng-src='{{message.url}}', alt='{{message.author.name}}')
+span.chat-img(ng-class="::{'pull-left': message.isAuthor, 'pull-right': !message.isAuthor}")
+    img.img-circle(ng-src='{{::message.url}}', alt='{{::message.author.name}}')
 
 md-item-content
     .md-tile-content
-        small.text-muted(ng-class="{'pull-right': message.isAuthor}")
+        small.text-muted(ng-class="::{'pull-right': message.isAuthor}")
             i.fa.fa-clock-o
             | &nbsp
             label.time(am-time-ago="message.createdAt")
-        h3(ng-bind-html="message.text | emoji")
+        h3(ng-bind-html="::message.text | emoji")
