@@ -53,17 +53,17 @@ angular.module('simple-chat.app', [
     .run(function ($rootScope, $log, $state, Auth, States) {
         $log.log("app - run: Subscribe to $stateChangeStart.");
 
-        $rootScope.$on('$stateChangeStart', function (event, next) {
-            Auth.isLoggedInAsync(function (loggedIn) {
-                $log.log("$stateChangeStart: Next is ", next);
-
-                //if (_.includes(States.directRoutes, next.name)) return;
-
-                if (next.authenticate && !loggedIn) {
-                    //event.preventDefault();
-                    $log.log("$stateChangeStart: You are not logged in. Redirect to login page.");
-                    $state.go('login');
-                }
-            });
-        });
+        //$rootScope.$on('$stateChangeStart', function (event, next) {
+        //    Auth.isLoggedInAsync(function (loggedIn) {
+        //        $log.log("$stateChangeStart: Next is ", next);
+        //
+        //        if (_.includes(States.directRoutes, next.name)) return;
+        //
+        //        if (next.authenticate && !loggedIn) {
+        //            //event.preventDefault();
+        //            $log.log("$stateChangeStart: You are not logged in. Redirect to login page.");
+        //            $state.go('login');
+        //        }
+        //    });
+        //});
     });

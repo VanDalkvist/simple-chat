@@ -1,12 +1,10 @@
 'use strict';
 
 angular.module('simple-chat.app')
-    .controller('LoginCtrl', function ($scope, $state, $log, Auth, currentUser) {
+    .controller('LoginCtrl', function ($scope, $state, $log, Auth) {
         $scope.login = _login;
         $scope.user = {};
         $scope.errors = {};
-
-        $log.log("LoginCtrl - init. Current user is ", currentUser);
 
         function _login(form) {
             $scope.submitted = true;

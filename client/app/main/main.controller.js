@@ -2,10 +2,8 @@
     'use strict';
 
     angular.module('simple-chat.app')
-        .controller('MainCtrl', function ($rootScope, $location, $state, $log,  Auth, currentUser) {
+        .controller('MainCtrl', function ($rootScope, $location, $state, $log, Auth) {
             $rootScope.state = $state;
-
-            $log.log("MainCtrl - init. Current user is ", currentUser);
 
             $rootScope.isCollapsed = true;
             $rootScope.isLoggedIn = Auth.isLoggedIn;

@@ -90,21 +90,21 @@
                  * Waits for currentUser to resolve before checking if user is logged in
                  */
                 isLoggedInAsync: function (cb) {
-                    if (currentUser.hasOwnProperty('$promise')) {
-                        currentUser.$promise.then(function () {
+                    //if (currentUser.hasOwnProperty('$promise')) {
+                    User.get().$promise.then(function () {
                             $log.log("Auth - isLoggedInAsync - by promise: You are logged in.");
                             cb(true);
                         }).catch(function () {
                             $log.log("Auth - isLoggedInAsync - by promise: You are not logged in.");
                             cb(false);
                         });
-                    } else if (currentUser.hasOwnProperty('role')) {
-                        $log.log("Auth - isLoggedInAsync - by role: You are logged in.");
-                        cb(true);
-                    } else {
-                        $log.log("Auth - isLoggedInAsync - by role: You are not logged in.");
-                        cb(false);
-                    }
+                    //} else if (currentUser.hasOwnProperty('role')) {
+                    //    $log.log("Auth - isLoggedInAsync - by role: You are logged in.");
+                    //    cb(true);
+                    //} else {
+                    //    $log.log("Auth - isLoggedInAsync - by role: You are not logged in.");
+                    //    cb(false);
+                    //}
                 },
 
                 /**
