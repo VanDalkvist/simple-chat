@@ -74,7 +74,7 @@
                  * @return {Object} user
                  */
                 getCurrentUser: function () {
-                    return currentUser;
+                    return User.get().$promise;
                 },
 
                 /**

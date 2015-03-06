@@ -11,5 +11,5 @@ md-toolbar.messages.md-whiteframe-z2.fix-top
 md-content.messages.md-padding
     p(ng-if='!!messages && !messages.length') There are no messages
     md-list
-        md-item(ng-repeat='message in messages', ng-class="{'left': isAuthor(message), 'right': !isAuthor(message)}")
+        md-item(ng-repeat='message in messages', ng-class="::{'left': isAuthor(message), 'right': !isAuthor(message)}")
             message-view(message="message")
