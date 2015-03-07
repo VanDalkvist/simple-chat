@@ -35,12 +35,13 @@ angular.module('simple-chat.app', [
 
             // Intercept 401s and redirect you to login
             responseError: function (response) {
-                if (response.status === 401) {
-                    // remove any stale tokens
-                    $cookieStore.remove('token');
-                    $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
-                    $location.path('/login');
+                if (response.status !== 401) {
+                    return $q.reject(response);
                 }
+                // remove any stale tokens
+                $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
+                $location.path('/login');
+                $cookieStore.remove('token');
                 return $q.reject(response);
             }
         };
