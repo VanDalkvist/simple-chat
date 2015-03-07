@@ -4,9 +4,15 @@
 
 'use strict';
 
+// dependencies
+
 var config = require('./environment');
 
-// #region private functions
+// exports
+
+module.exports.init = _init;
+
+// private functions
 
 /**
  * socket.io (v1.x.x) is powered by debug.
@@ -60,5 +66,3 @@ function _onConnect(socket) {
     // Insert sockets below
     require('../api/message/message.socket').register(socket);
 }
-
-module.exports = _init;

@@ -4,7 +4,12 @@
 
 'use strict';
 
-module.exports[404] = function pageNotFound(req, res) {
+module.exports[404] = _pageNotFound;
+module.exports[401] = _unauthorized;
+
+// private functions
+
+function _pageNotFound(req, res) {
     var viewFilePath = '404';
     var statusCode = 404;
     var result = {
@@ -19,4 +24,11 @@ module.exports[404] = function pageNotFound(req, res) {
 
         res.render(viewFilePath);
     });
-};
+}
+
+function _unauthorized(err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        return res.send(401, 'invalid token...');
+    }
+    next(err);
+}

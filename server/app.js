@@ -32,9 +32,9 @@ var socketio = require('socket.io')(server, {
     serveClient: config.env !== 'production',
     path: '/socket.io-client'
 });
-require('./config/socketio')(socketio);
-require('./config/express')(app);
-require('./routes')(app);
+require('./config/socketio').init(socketio);
+require('./config/express').init(app);
+require('./routes').init(app);
 
 // Start server
 server.listen(config.port, config.ip, function () {
