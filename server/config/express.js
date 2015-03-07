@@ -26,6 +26,7 @@ module.exports.init = _init;
 
 function _init(app) {
     var env = app.get('env');
+    var routers = {'development': _dev(app), 'test': _dev(app), 'production': _prod(app)};
 
     app.set('views', config.root + '/server/views');
     app.set('view engine', 'jade');
@@ -37,15 +38,21 @@ function _init(app) {
     app.use(cookieParser());
     app.use(passport.initialize());
 
-    if ('production' === env) {
+    routers[env]();
+}
+
+function _prod(app) {
+    return function () {
         console.log("Server was running under production mode: " + path.join(config.root, 'dist', 'public'));
         app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
         app.use(express.static(path.join(config.root, 'public')));
         app.set('appPath', config.root + '/public');
         app.use(morgan('dev'));
     }
+}
 
-    if ('development' === env || 'test' === env) {
+function _dev(app) {
+    return function () {
         console.log("Server was running under development environment.");
         app.use(require('connect-livereload')());
         app.use(express.static(path.join(config.root, '.tmp')));
