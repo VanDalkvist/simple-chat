@@ -16,14 +16,14 @@ var path = require('path');
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
 // Populate DB with sample data
-var envConfig = require('./config/seed.js');
-if (config.seedDB) {
-    envConfig.local();
-}
+//var envConfig = require('./config/seed.js');
+//if (config.seedDB) {
+//    envConfig.local();
+//}
 
-if (config.env === 'production') {
-    envConfig.prod();
-}
+//if (config.env === 'production') {
+//    envConfig.prod();
+//}
 
 // Setup server
 var app = express();
