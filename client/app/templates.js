@@ -6,11 +6,6 @@ angular.module('simple-chat.app').run(['$templateCache', function ($templateCach
     );
 
 
-    $templateCache.put('app/account/settings/settings.html',
-        "<md-content layout=column class=\"settings md-padding\"><h2>Change Password</h2><form name=form ng-submit=changePassword(form) layout=row><md-input-container flex=flex><label>Current Password</label><input type=password ng-model=user.oldPassword autocomplete=off db-error=\"db-error\"><p ng-show=form.password.$error.mongoose class=help-block>{{ errors.other }}</p></md-input-container><md-input-container flex=flex><label>New Password</label><input type=password ng-model=user.newPassword autocomplete=off ng-minlength=3 required db-error=\"db-error\"><p ng-show=\"(form.newPassword.$error.minlength || form.newPassword.$error.required) &amp;&amp; (form.newPassword.$dirty || submitted)\" class=help-block>Password must be at least 3 characters.</p></md-input-container><p class=help-block>{{ message }}</p><md-button type=submit aria-label=Submit class=md-primary><i class=\"fa fa-floppy-o\"></i></md-button></form></md-content>"
-    );
-
-
     $templateCache.put('app/admin/admin.html',
         "<md-content layout=column class=md-padding><md-button type=button ng-click=removeAll() class=\"remove-messages md-raised md-warn\">Remove All Messages</md-button><md-list><md-item ng-repeat=\"user in users\"><md-item-content><div class=md-tile-content><div class=pull-left><h3><strong>{{user.name}}</strong></h3><h4 class=text-muted>{{user.email}}</h4></div><a ng-click=delete(user) class=\"trash pull-right\"><i class=\"fa fa-trash-o\"></i></a></div></md-item-content></md-item></md-list></md-content>"
     );
@@ -53,6 +48,11 @@ angular.module('simple-chat.app').run(['$templateCache', function ($templateCach
 
     $templateCache.put('app/navigation/sidebar.html',
         "<md-sidenav md-component-id=left class=\"md-sidenav-left md-whiteframe-z2\"><div ng-click=$mdSidenav(&quot;left&quot;).close();><md-toolbar md-theme=indigo><h1 class=md-toolbar-tools><i class=\"fa fa-cog fa-spin fa-fw\"></i>&nbsp Management</h1></md-toolbar><md-content layout=column><a ui-sref=home md-highlight=\"state.current.name == &quot;main&quot;\" md-ink-ripple=#bbb ng-if=isLoggedIn() class=\"menu-item menu-sub-item md-menu-item\"><span><i class=\"fa fa-pencil\"></i>&nbsp Talk</span></a><a ui-sref=settings md-highlight=\"state.current.name == &quot;settings&quot;\" md-ink-ripple=#bbb ng-if=isLoggedIn() class=\"menu-item menu-sub-item md-menu-item\"><span><i class=\"fa fa-sliders\"></i>&nbsp Settings</span></a><a ui-sref=admin md-highlight=\"state.current.name == &quot;admin&quot;\" md-ink-ripple=#bbb ng-if=isAdmin() class=\"menu-item menu-sub-item md-menu-item\"><span><i class=\"fa fa-database\"></i>&nbsp Admin</span></a><a ng-click=logout() md-ink-ripple=#bbb ng-if=isLoggedIn() class=\"menu-item menu-sub-item md-menu-item\"><span><i class=\"fa fa-sign-out\"></i>&nbsp Logout</span></a></md-content></div></md-sidenav>"
+    );
+
+
+    $templateCache.put('app/settings/settings.html',
+        "<md-content layout=column class=\"settings md-padding\"><h2>Change Password</h2><form name=form ng-submit=changePassword(form) layout=row><md-input-container flex=flex><label>Current Password</label><input type=password ng-model=user.oldPassword autocomplete=off db-error=\"db-error\"><p ng-show=form.password.$error.mongoose class=help-block>{{ errors.other }}</p></md-input-container><md-input-container flex=flex><label>New Password</label><input type=password ng-model=user.newPassword autocomplete=off ng-minlength=3 required db-error=\"db-error\"><p ng-show=\"(form.newPassword.$error.minlength || form.newPassword.$error.required) &amp;&amp; (form.newPassword.$dirty || submitted)\" class=help-block>Password must be at least 3 characters.</p></md-input-container><p class=help-block>{{ message }}</p><md-button type=submit aria-label=Submit class=md-primary><i class=\"fa fa-floppy-o\"></i></md-button></form></md-content>"
     );
 
 }]);

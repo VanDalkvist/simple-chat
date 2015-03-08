@@ -21,17 +21,5 @@ angular.module('simple-chat.app')
                         //return undefined;
                 //    }]
                 //}
-            })
-            .state('settings', {
-                url: '/settings',
-                authenticate: true,
-                parent: 'main',
-                views: {
-                    'content@main': {
-                        templateUrl: 'app/account/settings/settings.html',
-                        controller: 'SettingsCtrl'
-                    }
-                }
-            }
-        );
+            });
     });
