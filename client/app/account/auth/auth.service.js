@@ -6,7 +6,8 @@
             var currentUser = {};
             if ($cookieStore.get('token')) {
                 $log.log("Auth: Token was not found. Try to load user info.");
-                currentUser = User.get(function () {
+
+                $rootScope.user = User.get(function () {
                     $log.log("Auth: Current user was loaded.");
                 });
             }
@@ -29,7 +30,7 @@
                         success(function (data) {
                             $cookieStore.put('token', data.token);
                             $log.log("Auth - login: Success login.");
-                            currentUser = User.get(function () {
+                            $rootScope.user = User.get(function () {
                                 $log.log("Auth - login: Current user was loaded.");
                             });
                             deferred.resolve(data);
@@ -51,7 +52,7 @@
                 logout: function () {
                     $cookieStore.remove('token');
                     $log.log("Auth - logout: Reset user. Remove token.");
-                    currentUser = {};
+                    $rootScope.user = {};
                 },
 
                 /**
@@ -62,8 +63,9 @@
                  * @return {Promise}
                  */
                 changePassword: function (oldPassword, newPassword) {
+                    // todo: remove userId from request
                     return User.changePassword(
-                        {id: currentUser._id},
+                        {id: $rootScope.user._id},
                         {oldPassword: oldPassword, newPassword: newPassword}
                     ).$promise;
                 },
@@ -74,7 +76,7 @@
                  * @return {Object} user
                  */
                 getCurrentUser: function () {
-                    return User.get().$promise;
+                    return $rootScope.user;
                 },
 
                 /**
@@ -83,7 +85,7 @@
                  * @return {Boolean}
                  */
                 isLoggedIn: function () {
-                    return currentUser.hasOwnProperty('role');
+                    return $rootScope.user ? $rootScope.user.hasOwnProperty('role') : false;
                 },
 
                 /**
@@ -113,7 +115,7 @@
                  * @return {Boolean}
                  */
                 isAdmin: function () {
-                    return currentUser.role === 'admin';
+                    return $rootScope.user ? $rootScope.user.role === 'admin' : false;
                 },
 
                 /**

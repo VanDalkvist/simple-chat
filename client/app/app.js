@@ -12,15 +12,17 @@ angular.module('simple-chat.app', [
     'ui.bootstrap.typeahead',
     'ngMaterial'
 ])
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider, cacheProvider) {
         $urlRouterProvider.otherwise('/');
 
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('authInterceptor');
 
         $mdThemingProvider.theme('indigo');
+
+        cacheProvider.init('sessionStorage');
     })
-    .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location, $log) {
+    .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location, $log, cache) {
         return {
             // Add authorization token to headers
             request: function (config) {
@@ -39,6 +41,8 @@ angular.module('simple-chat.app', [
                     return $q.reject(response);
                 }
                 // remove any stale tokens
+                $rootScope.user = {};
+                cache.remove('user');
                 $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
                 $location.path('/login');
                 $cookieStore.remove('token');
