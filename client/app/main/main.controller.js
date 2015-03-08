@@ -12,7 +12,7 @@
             $rootScope.logout = function () {
                 Auth.logout();
                 $log.log("MainCtrl - logout: Redirect to login page.");
-                $state.go('/login');
+                $state.go('login');
             };
 
             $rootScope.isActive = function (route) {

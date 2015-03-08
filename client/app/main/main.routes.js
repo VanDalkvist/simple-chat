@@ -14,7 +14,8 @@
                     controller: 'MainCtrl',
                     resolve: {
                         currentUser: ['$state', '$log', 'Auth', function ($state, $log, Auth) {
-                            return Auth.getCurrentUser();
+                            var currentUser = Auth.getCurrentUser();
+                            return currentUser ? currentUser.$promise : currentUser;
                             //if (!_.isEmpty(currentUser) && currentUser.hasOwnProperty('$promise')) {
                             //    $log.log("main state - current user - resolve: current user has promise - return it.");
                             //    return currentUser.$promise;
