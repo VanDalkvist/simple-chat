@@ -30,14 +30,14 @@
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
     <!-- injector:css -->
-    <link rel="stylesheet" href="app/admin/admin.css">
     <link rel="stylesheet" href="app/app.css">
+    <link rel="stylesheet" href="app/components/admin/admin.css">
+    <link rel="stylesheet" href="app/components/emojis/emojis.css">
+    <link rel="stylesheet" href="app/components/messages/messages.css">
+    <link rel="stylesheet" href="app/components/settings/settings.css">
     <link rel="stylesheet" href="app/core/modal/modal.css">
-    <link rel="stylesheet" href="app/emojis/emojis.css">
     <link rel="stylesheet" href="app/main/main.css">
-    <link rel="stylesheet" href="app/messages/messages.css">
     <link rel="stylesheet" href="app/navigation/sidebar.css">
-    <link rel="stylesheet" href="app/settings/settings.css">
     <!-- endinjector -->
     <!-- endbuild -->
 </head>
@@ -104,8 +104,15 @@
 <script src="app/account/auth/auth.service.js"></script>
 <script src="app/account/auth/user.service.js"></script>
 <script src="app/account/login/login.controller.js"></script>
-<script src="app/admin/admin.controller.js"></script>
-<script src="app/admin/admin.routes.js"></script>
+<script src="app/components/admin/admin.controller.js"></script>
+<script src="app/components/admin/admin.routes.js"></script>
+<script src="app/components/emojis/emojis.controller.js"></script>
+<script src="app/components/messages/message-view.directive.js"></script>
+<script src="app/components/messages/messages.controller.js"></script>
+<script src="app/components/messages/messages.resource.js"></script>
+<script src="app/components/messages/messages.routes.js"></script>
+<script src="app/components/settings/settings.controller.js"></script>
+<script src="app/components/settings/settings.routes.js"></script>
 <script src="app/core/autocomplete.directive.js"></script>
 <script src="app/core/db-error.directive.js"></script>
 <script src="app/core/focus-on.directive.js"></script>
@@ -113,16 +120,9 @@
 <script src="app/core/modal/modal.service.js"></script>
 <script src="app/core/socket/cache.js"></script>
 <script src="app/core/socket/socket.service.js"></script>
-<script src="app/emojis/emojis.controller.js"></script>
 <script src="app/main/main.controller.js"></script>
 <script src="app/main/main.routes.js"></script>
-<script src="app/messages/message-view.directive.js"></script>
-<script src="app/messages/messages.controller.js"></script>
-<script src="app/messages/messages.resource.js"></script>
-<script src="app/messages/messages.routes.js"></script>
 <script src="app/navigation/navigation.controller.js"></script>
-<script src="app/settings/settings.controller.js"></script>
-<script src="app/settings/settings.routes.js"></script>
 <script src="app/templates.js"></script>
 <!-- endinjector -->
 <!-- endbuild -->

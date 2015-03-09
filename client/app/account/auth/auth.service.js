@@ -3,7 +3,7 @@
 
     angular.module('simple-chat.app')
         .factory('Auth', function Auth($location, $rootScope, $http, $log, $cookieStore, $q, User) {
-            var currentUser = {};
+            $rootScope.user = {};
             if ($cookieStore.get('token')) {
                 $log.log("Auth: Token was not found. Try to load user info.");
 

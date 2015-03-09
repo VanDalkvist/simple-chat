@@ -10,7 +10,7 @@
     function messageViewDirective() {
         return {
             restrict: 'E',
-            templateUrl: 'app/messages/message-view.html',
+            templateUrl: 'app/components/messages/message-view.html',
             scope: {
                 message: '='
             },

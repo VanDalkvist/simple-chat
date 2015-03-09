@@ -52,7 +52,7 @@
         function _openEmojisDialog(event) {
             $mdDialog.show({
                 controller: 'EmojisController',
-                templateUrl: 'app/emojis/emojis.html',
+                templateUrl: 'app/components/emojis/emojis.html',
                 targetEvent: event
             }).then(function (answer) {
                 $scope.newMessage.concat(" " + answer);

@@ -8,7 +8,7 @@ angular.module('simple-chat.app')
                 parent: 'main',
                 views: {
                     'content@main': {
-                        templateUrl: 'app/admin/admin.html',
+                        templateUrl: 'app/components/admin/admin.html',
                         controller: 'AdminCtrl'
                     }
                 }

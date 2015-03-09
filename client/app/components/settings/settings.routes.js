@@ -13,7 +13,7 @@
                     parent: 'main',
                     views: {
                         'content@main': {
-                            templateUrl: 'app/settings/settings.html',
+                            templateUrl: 'app/components/settings/settings.html',
                             controller: 'SettingsCtrl'
                         }
                     }
