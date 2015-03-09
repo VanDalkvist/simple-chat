@@ -5,7 +5,7 @@
         .factory('Auth', function Auth($location, $rootScope, $http, $log, $cookieStore, $q, User) {
             $rootScope.user = {};
             if ($cookieStore.get('token')) {
-                $log.log("Auth: Token was not found. Try to load user info.");
+                $log.log("Auth: Token was found. Try to load user info.");
 
                 $rootScope.user = User.get(function () {
                     $log.log("Auth: Current user was loaded.");
@@ -46,8 +46,6 @@
 
                 /**
                  * Delete access token and user info
-                 *
-                 * @param  {Function}
                  */
                 logout: function () {
                     $cookieStore.remove('token');
@@ -94,12 +92,12 @@
                 isLoggedInAsync: function (cb) {
                     //if (currentUser.hasOwnProperty('$promise')) {
                     User.get().$promise.then(function () {
-                            $log.log("Auth - isLoggedInAsync - by promise: You are logged in.");
-                            cb(true);
-                        }).catch(function () {
-                            $log.log("Auth - isLoggedInAsync - by promise: You are not logged in.");
-                            cb(false);
-                        });
+                        $log.log("Auth - isLoggedInAsync - by promise: You are logged in.");
+                        cb(true);
+                    }).catch(function () {
+                        $log.log("Auth - isLoggedInAsync - by promise: You are not logged in.");
+                        cb(false);
+                    });
                     //} else if (currentUser.hasOwnProperty('role')) {
                     //    $log.log("Auth - isLoggedInAsync - by role: You are logged in.");
                     //    cb(true);
