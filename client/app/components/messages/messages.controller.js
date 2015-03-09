@@ -5,11 +5,9 @@
     angular.module('simple-chat.app')
         .controller('MessagesCtrl', MessagesCtrl);
 
-    MessagesCtrl.$inject = ['$scope', '$log', 'socket', 'currentUser', 'Messages', 'emojis', '$mdDialog'];
+    MessagesCtrl.$inject = ['$scope', '$log', 'Messages', 'emojis', '$mdDialog', 'currentUser', 'connection'];
 
-    function MessagesCtrl($scope, $log, socket, currentUser, Messages, emojis, $mdDialog) {
-        $log.log("MessagesCtrl - init. Current user is ", currentUser);
-
+    function MessagesCtrl($scope, $log, Messages, emojis, $mdDialog, currentUser, connection) {
         // #region init
 
         var author = currentUser && {name: currentUser.name, email: currentUser.email};
@@ -20,21 +18,27 @@
             return {name: emoji.substr(1, emoji.length - 2)};
         });
 
-        $scope.messages = Messages.query(_onMessagesLoaded);
+        $scope.messages = Messages.query(_syncUpdates, _unsyncUpdates);
 
         $scope.addMessage = _addMessage;
         $scope.isAuthor = _isAuthor;
         $scope.openEmojisDialog = _openEmojisDialog;
 
+        // watches and events
+
         $scope.$on('$destroy', function () {
-            socket.unsyncUpdates('message');
+            _unsyncUpdates();
         });
 
         // #region private functions
 
         // todo: rewrite to sockets
-        function _onMessagesLoaded(res) {
-            socket.syncUpdates('message', $scope.messages);
+        function _syncUpdates(res) {
+            connection.sync('message', $scope.messages);
+        }
+
+        function _unsyncUpdates() {
+            connection.unsync('message');
         }
 
         // todo: rewrite to sockets

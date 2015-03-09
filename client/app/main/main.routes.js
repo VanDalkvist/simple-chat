@@ -13,16 +13,11 @@
                     templateUrl: 'app/main/main.html',
                     controller: 'MainCtrl',
                     resolve: {
-                        currentUser: ['$state', '$log', 'Auth', function ($state, $log, Auth) {
-                            var currentUser = Auth.getCurrentUser();
-                            return currentUser ? currentUser.$promise : currentUser;
-                            //if (!_.isEmpty(currentUser) && currentUser.hasOwnProperty('$promise')) {
-                            //    $log.log("main state - current user - resolve: current user has promise - return it.");
-                            //    return currentUser.$promise;
-                            //}
-                            //
-                            //$log.log("main state - current user - resolve: Current user does not exist. Redirect to login page.");
-                            //return $state.go('login');
+                        currentUser: ['User', function (User) {
+                            return User.get().$promise;
+                        }],
+                        connection: ['socket', 'currentUser', function (socket, currentUser) {
+                            return socket.connect();
                         }]
                     }
                 });

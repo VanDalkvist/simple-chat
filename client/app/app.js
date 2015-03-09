@@ -37,11 +37,11 @@ angular.module('simple-chat.app', [
 
             // Intercept 401s and redirect you to login
             responseError: function (response) {
-                if (response.status !== 401) {
+                if (response.status !== 401 && response.status !== 403) {
                     return $q.reject(response);
                 }
                 // remove any stale tokens
-                $rootScope.user = {};
+                $rootScope.user = undefined;
                 cache.remove('user');
                 $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
                 $location.path('/login');
@@ -56,7 +56,16 @@ angular.module('simple-chat.app', [
         };
     })())
     .run(function ($rootScope, $log, $state, Auth, States) {
-        $log.log("app - run: Subscribe to $stateChangeStart.");
+        $log.log("app: Subscribe to $stateChangeStart.");
+
+        // handle any route related errors (specifically used to check for hidden resolve errors)
+        $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error){
+            $log.log('$stateChangeError: ', error);
+
+            // todo: prepare token, current user
+            if (error.status === 401)
+                $state.go('login');
+        });
 
         //$rootScope.$on('$stateChangeStart', function (event, next) {
         //    Auth.isLoggedInAsync(function (loggedIn) {
