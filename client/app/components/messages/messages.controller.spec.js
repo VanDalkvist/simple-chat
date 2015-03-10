@@ -14,12 +14,15 @@ describe('Controller: MessagesCtrl', function () {
     beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
         $httpBackend = _$httpBackend_;
 
+        $httpBackend.when('GET', '/api/users/me')
+            .respond({name: 'test'});
+
         $httpBackend.when('GET', '/api/messages')
             .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
         scope = $rootScope.$new();
         MessagesCtrl = $controller('MessagesCtrl', {
-            $scope: scope, currentUser: {email: 'email'}
+            $scope: scope, currentUser: {email: 'email'}, connection: {sync: function(){}, unsync: function(){}}
         });
     }));
 
