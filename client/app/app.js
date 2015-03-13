@@ -12,17 +12,15 @@ angular.module('simple-chat.app', [
     'ui.bootstrap.typeahead',
     'ngMaterial'
 ])
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider, cacheProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
         $urlRouterProvider.otherwise('/');
 
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('authInterceptor');
 
         $mdThemingProvider.theme('indigo');
-
-        cacheProvider.init('sessionStorage');
     })
-    .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location, $log, cache) {
+    .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location, $log) {
         return {
             // Add authorization token to headers
             request: function (config) {
@@ -42,7 +40,6 @@ angular.module('simple-chat.app', [
                 }
                 // remove any stale tokens
                 $rootScope.user = undefined;
-                cache.remove('user');
                 $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
                 $location.path('/login');
                 $cookieStore.remove('token');
@@ -55,7 +52,7 @@ angular.module('simple-chat.app', [
             directRoutes: ['login']
         };
     })())
-    .run(function ($rootScope, $log, $state, Auth, States) {
+    .run(function ($rootScope, $log, $state) {
         $log.log("app: Subscribe to $stateChangeStart.");
 
         // handle any route related errors (specifically used to check for hidden resolve errors)
@@ -63,21 +60,6 @@ angular.module('simple-chat.app', [
             $log.log('$stateChangeError: ', error);
 
             // todo: prepare token, current user
-            if (error.status === 401)
-                $state.go('login');
+            if (error.status === 401) $state.go('login');
         });
-
-        //$rootScope.$on('$stateChangeStart', function (event, next) {
-        //    Auth.isLoggedInAsync(function (loggedIn) {
-        //        $log.log("$stateChangeStart: Next is ", next);
-        //
-        //        if (_.includes(States.directRoutes, next.name)) return;
-        //
-        //        if (next.authenticate && !loggedIn) {
-        //            //event.preventDefault();
-        //            $log.log("$stateChangeStart: You are not logged in. Redirect to login page.");
-        //            $state.go('login');
-        //        }
-        //    });
-        //});
     });
