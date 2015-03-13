@@ -7,18 +7,12 @@
 var superAgent = require('superagent');
 var agent = superAgent.agent();
 
-var User = require('../../api/user/user.model');
-
 // #region initialization
-
-var user = {
-    email: 'test@test.com',
-    password: 'password'
-};
 
 // #region private methods
 
-function _login(request, done) {
+function _login(request, user, done) {
+    console.log(user);
     request
         .post('/auth/local')
         .send(user)

@@ -5,6 +5,7 @@ var app = require('../../app');
 var request = require('supertest')(app);
 var agentHelper = require('../../tests/core/login-helper');
 var User = require('../user/user.model');
+var _ = require('lodash');
 
 describe('GET /api/messages', function () {
 
@@ -12,21 +13,24 @@ describe('GET /api/messages', function () {
     var token;
 
     before(function (done) {
-        var user = new User({
+        var password = 'password';
+        var userModel = new User({
             provider: 'local',
             name: 'Fake User',
-            email: 'test@test.com',
-            password: 'password'
+            email: 'test1@test1.com',
+            password: password
         });
 
-        user.save(function (err, user) {
-            should.not.exist(err);
-            should.exist(user);
+        User.remove().exec().then(function () {
+            userModel.save(function (err, user) {
+                should.not.exist(err);
+                should.exist(user);
 
-            agentHelper.login(request, function (loginAgent, credentials) {
-                agent = loginAgent;
-                token = credentials.token;
-                done();
+                agentHelper.login(request, {email: user.email, password: password}, function (loginAgent, credentials) {
+                    agent = loginAgent;
+                    token = credentials.token;
+                    done();
+                });
             });
         });
     });
