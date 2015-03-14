@@ -4,7 +4,7 @@
 
     angular.module('simple-chat.app')
         .config(function ($stateProvider) {
-            console.debug("settings.routes: Configuring [main] routes.");
+            console.debug("settings.routes: Configuring 'settings' routes.");
 
             $stateProvider
                 .state('settings', {

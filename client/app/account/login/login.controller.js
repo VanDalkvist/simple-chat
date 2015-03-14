@@ -6,15 +6,14 @@ angular.module('simple-chat.app')
         $scope.user = {};
         $scope.errors = {};
 
-        function _login(form) {
+        function _login() {
             $scope.submitted = true;
 
-            if (!form.$valid) return;
-
-            Auth.login({email: $scope.user.email, password: $scope.user.password}).then(function () {
-                $state.go('home');
-            }, function (err) {
-                $scope.errors.other = err.message;
-            });
+            Auth.login({email: $scope.user.email, password: $scope.user.password})
+                .then(function () {
+                    $state.go('home');
+                }, function (err) {
+                    $scope.errors.other = err.message;
+                });
         }
     });

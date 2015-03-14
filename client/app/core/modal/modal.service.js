@@ -4,16 +4,16 @@ angular.module('simple-chat.app')
     .factory('Modal', function ($rootScope, $modal) {
         /**
          * Opens a modal
-         * @param  {Object} scope      - an object to be merged with modal's scope
+         * @param  {Object} scopeModel      - an object to be merged with modal's scope
          * @param  {String} modalClass - (optional) class(es) to be applied to the modal
          * @return {Object}            - the instance $modal.open() returns
          */
-        function openModal(scope, modalClass) {
+        function openModal(scopeModel, modalClass) {
             var modalScope = $rootScope.$new();
-            scope = scope || {};
+            scopeModel = scopeModel || {};
             modalClass = modalClass || 'modal-default';
 
-            angular.extend(modalScope, scope);
+            angular.extend(modalScope, scopeModel);
 
             return $modal.open({
                 templateUrl: 'app/core/modal/modal.html',
@@ -44,9 +44,9 @@ angular.module('simple-chat.app')
                     return function () {
                         var args = Array.prototype.slice.call(arguments),
                             name = args.shift(),
-                            deleteModal;
+                            ModalInstance;
 
-                        deleteModal = openModal({
+                        ModalInstance = openModal({
                             modal: {
                                 dismissable: true,
                                 title: 'Confirm Delete',
@@ -55,19 +55,19 @@ angular.module('simple-chat.app')
                                     classes: 'btn-danger',
                                     text: 'Delete',
                                     click: function (e) {
-                                        deleteModal.close(e);
+                                        ModalInstance.close(e);
                                     }
                                 }, {
                                     classes: 'btn-default',
                                     text: 'Cancel',
                                     click: function (e) {
-                                        deleteModal.dismiss(e);
+                                        ModalInstance.dismiss(e);
                                     }
                                 }]
                             }
                         }, 'modal-danger');
 
-                        deleteModal.result.then(function (event) {
+                        ModalInstance.result.then(function (event) {
                             del.apply(event, args);
                         });
                     };

@@ -4,7 +4,7 @@
 
     angular.module('simple-chat.app')
         .config(function ($stateProvider) {
-            console.debug("messages.routes: Configuring [home] routes.");
+            console.debug("messages.routes: Configuring 'home' routes.");
 
             $stateProvider
                 .state('home', {

@@ -2,7 +2,7 @@
 
 angular.module('simple-chat.app')
     .config(function ($stateProvider) {
-        console.debug("account.routes: Configuring [login, settings] routes.");
+        console.debug("account.routes: Configuring 'login' routes.");
 
         $stateProvider
             .state('login', {

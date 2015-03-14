@@ -8,11 +8,12 @@ angular.module('simple-chat.app')
         $scope.removeAll = _removeAll;
 
         function _delete(user) {
-            User.remove({id: user._id});
-            angular.forEach($scope.users, function (u, i) {
-                if (u === user) {
-                    $scope.users.splice(i, 1);
-                }
+            User.remove({id: user._id}, function () {
+                angular.forEach($scope.users, function (u, i) {
+                    if (u === user) {
+                        $scope.users.splice(i, 1);
+                    }
+                });
             });
         }
 

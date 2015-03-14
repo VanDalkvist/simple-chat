@@ -18,6 +18,9 @@
                         }],
                         connection: ['socket', 'currentUser', function (socket, currentUser) {
                             return socket.connect();
+                        }],
+                        loginModel: ['$q', 'Auth', 'currentUser', function ($q, Auth, currentUser) {
+                            return $q.when({isLoggedIn: true, isAdmin: $q.when(Auth.isAdmin())});
                         }]
                     }
                 });

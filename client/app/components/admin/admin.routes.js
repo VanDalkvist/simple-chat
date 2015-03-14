@@ -2,6 +2,8 @@
 
 angular.module('simple-chat.app')
     .config(function ($stateProvider) {
+        console.debug("admin.routes: Configuring 'admin' routes.");
+
         $stateProvider
             .state('admin', {
                 url: '/admin',

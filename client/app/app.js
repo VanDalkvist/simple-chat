@@ -39,7 +39,7 @@ angular.module('simple-chat.app', [
                     return $q.reject(response);
                 }
                 // remove any stale tokens
-                $rootScope.user = undefined;
+                //$rootScope.user = undefined;
                 $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
                 $location.path('/login');
                 $cookieStore.remove('token');

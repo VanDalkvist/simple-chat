@@ -5,6 +5,7 @@ angular.module('simple-chat.app')
     .factory('socket', function ($location, $log, socketFactory, Auth) {
 
         var socket = undefined;
+        var socketConnection = {sync: _syncUpdates, unsync: _unsyncUpdates};
 
         return {
             connect: _connect
@@ -13,7 +14,7 @@ angular.module('simple-chat.app')
         // private functions
 
         function _connect() {
-            if (socket) return {sync: _syncUpdates, unsync: _unsyncUpdates};
+            if (socket) return socketConnection;
 
             $log.log("socket: initialization");
 
@@ -27,15 +28,13 @@ angular.module('simple-chat.app')
 
             socket = socketFactory({ioSocket: ioSocket});
 
-            return {sync: _syncUpdates, unsync: _unsyncUpdates};
+            return socketConnection;
         }
 
         /**
-         * Register listeners to sync an array with updates on a model
-         *
+         * Register listeners to sync an array with updates on a model.
          * Takes the array we want to sync, the model name that socket updates are sent from,
          * and an optional callback function after new items are updated.
-         *
          * @param {String} modelName
          * @param {Array} array
          * @param {Function} cb
@@ -75,7 +74,6 @@ angular.module('simple-chat.app')
 
         /**
          * Removes listeners for a models updates on the socket
-         *
          * @param modelName
          */
         function _unsyncUpdates(modelName) {

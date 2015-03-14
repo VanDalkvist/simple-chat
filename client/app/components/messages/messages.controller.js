@@ -5,9 +5,9 @@
     angular.module('simple-chat.app')
         .controller('MessagesCtrl', MessagesCtrl);
 
-    MessagesCtrl.$inject = ['$scope', '$log', 'Messages', 'emojis', '$mdDialog', 'currentUser', 'connection'];
+    MessagesCtrl.$inject = ['$scope', '$mdDialog', 'Messages', 'emojis', 'currentUser', 'connection'];
 
-    function MessagesCtrl($scope, $log, Messages, emojis, $mdDialog, currentUser, connection) {
+    function MessagesCtrl($scope, $mdDialog, Messages, emojis, currentUser, connection) {
         // #region init
 
         var author = currentUser && {name: currentUser.name, email: currentUser.email};
