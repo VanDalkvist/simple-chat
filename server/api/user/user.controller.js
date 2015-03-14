@@ -79,6 +79,10 @@ exports.changePassword = function (req, res, next) {
     });
 };
 
+exports.isAdmin = function _isAdmin(req, res, next) {
+    res.send(req.user.role == 'admin');
+};
+
 /**
  * Get my info
  */
