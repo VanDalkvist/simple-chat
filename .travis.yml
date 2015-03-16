@@ -7,5 +7,7 @@ before_script:
   - npm install -g bower grunt-cli
   - bower install
 after_script:
-  - cat "coverage/PhantomJS 1.9.8 (Windows 7)/lcov.info" | codeclimate
+  - cat "coverage/PhantomJS 1.9.8 (Linux)/lcov.info" | codeclimate
 services: mongodb
+addons:
+  code_climate
