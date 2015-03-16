@@ -20,7 +20,7 @@ module.exports = function (config) {
             'client/bower_components/angular-moment/angular-moment.js',
             'client/bower_components/angular-emojis/lib/emoji.js',
             'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-            'client/bower_components/lodash/dist/lodash.compat.js',
+            'client/bower_components/lodash/lodash.js',
             'client/bower_components/angular-socket-io/socket.js',
             'client/bower_components/angular-ui-router/release/angular-ui-router.js',
             'client/bower_components/angular-material/angular-material.js',
@@ -29,19 +29,18 @@ module.exports = function (config) {
             'client/bower_components/hammer.js/hammer.js',
             'client/app/app.js',
             'client/app/**/*.js',
-            'client/app/**/*.coffee',
-            'client/components/**/*.js',
-            'client/components/**/*.coffee',
             'client/app/**/*.jade',
-            'client/components/**/*.jade',
-            'client/app/**/*.html',
-            'client/components/**/*.html'
         ],
+
+        reporters: ['progress', 'coverage'],
+
+        coverageReporter: { type : 'lcovonly', dir: 'coverage', file: 'lcov.info' },
 
         preprocessors: {
             '**/*.jade': 'ng-jade2js',
             '**/*.html': 'html2js',
-            '**/*.coffee': 'coffee'
+            '**/*.coffee': 'coffee',
+            '**/*.js': ['coverage']
         },
 
         ngHtml2JsPreprocessor: {
