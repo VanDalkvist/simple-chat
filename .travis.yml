@@ -10,4 +10,5 @@ after_script:
   - cat "coverage/PhantomJS 1.9.8 (Linux)/lcov.info" | codeclimate
 services: mongodb
 addons:
-  code_climate
+  code_climate:
+
