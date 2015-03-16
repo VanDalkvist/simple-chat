@@ -1,9 +1,7 @@
-simple-talk - [![Release](https://img.shields.io/github/release/vandalkvist/simple-talk.svg)]()
+simple-talk - [![Release](https://img.shields.io/github/release/vandalkvist/simple-talk.svg)]() [![Build Status](https://travis-ci.org/VanDalkvist/simple-talk.svg?branch=master)](https://travis-ci.org/VanDalkvist/simple-talk) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ===========
 
-Simple implementation of chat on Socket.IO and AngularJS and MongoDb as data service.
-
-Build - [![Build Status](https://travis-ci.org/VanDalkvist/simple-talk.svg?branch=master)](https://travis-ci.org/VanDalkvist/simple-talk)
+Simple implementation of chat on Socket.IO and AngularJS and MongoDb as data service. 
 
 Dependencies - [![Dependency Status](https://david-dm.org/VanDalkvist/simple-talk.svg)](https://david-dm.org/VanDalkvist/simple-talk)
 [![devDependency Status](https://david-dm.org/VanDalkvist/simple-talk/dev-status.svg)](https://david-dm.org/VanDalkvist/simple-talk#info=devDependencies)
