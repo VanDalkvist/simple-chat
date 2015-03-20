@@ -1,4 +1,4 @@
-simple-talk - [![Release](https://img.shields.io/github/release/vandalkvist/simple-talk.svg)]() [![Build Status](https://travis-ci.org/VanDalkvist/simple-talk.svg?branch=master)](https://travis-ci.org/VanDalkvist/simple-talk) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+simple-talk - [![Release](https://img.shields.io/github/release/vandalkvist/simple-talk.svg)]() [![Build Status](https://travis-ci.org/VanDalkvist/simple-talk.svg?branch=master)](https://travis-ci.org/VanDalkvist/simple-talk) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/VanDalkvist/vanstack)
 ===========
 
 Simple implementation of chat on Socket.IO and AngularJS Material Design.
