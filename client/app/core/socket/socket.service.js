@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('simple-chat.app')
-    .factory('socket', function ($location, $log, socketFactory, Auth) {
+    .factory('socket', function ($location, $log, $sce, socketFactory, Auth) {
 
         var socket = undefined;
         var socketConnection = {sync: _syncUpdates, unsync: _unsyncUpdates};
@@ -50,6 +50,7 @@ angular.module('simple-chat.app')
                 var index = array.indexOf(oldItem);
                 var event = 'created';
 
+                item.text = $sce.trustAsHtml(item.text).toString();
                 // replace oldItem if it exists
                 // otherwise just add item to the collection
                 if (oldItem) {

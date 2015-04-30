@@ -38,7 +38,7 @@
 
         function _prepareMessages(messages) {
             messages.forEach(function (message) {
-                message.text = $sce.trustAsHtml(message.text);
+                message.text = $sce.trustAsHtml(message.text).toString();
             });
         }
 
