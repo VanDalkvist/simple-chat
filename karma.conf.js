@@ -32,7 +32,7 @@ module.exports = function (config) {
             'client/app/**/*.jade',
         ],
 
-        reporters: ['progress', 'coverage'],
+        reporters: ['progress'],
 
         coverageReporter: { type : 'lcovonly', dir: 'coverage', file: 'lcov.info' },
 
