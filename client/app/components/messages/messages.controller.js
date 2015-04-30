@@ -5,9 +5,9 @@
     angular.module('simple-chat.app')
         .controller('MessagesCtrl', MessagesCtrl);
 
-    MessagesCtrl.$inject = ['$scope', '$mdDialog', 'Messages', 'emojis', 'currentUser', 'connection'];
+    MessagesCtrl.$inject = ['$scope', '$sce', 'Messages', 'emojis', 'currentUser', 'connection'];
 
-    function MessagesCtrl($scope, $mdDialog, Messages, emojis, currentUser, connection) {
+    function MessagesCtrl($scope, $sce, Messages, emojis, currentUser, connection) {
         // #region init
 
         var author = currentUser && {name: currentUser.name, email: currentUser.email};
@@ -18,11 +18,10 @@
             return {name: emoji.substr(1, emoji.length - 2)};
         });
 
-        $scope.messages = Messages.query(_syncUpdates, _unsyncUpdates);
+        $scope.messages = Messages.query(_onMessagesLoaded, _unsyncUpdates);
 
         $scope.addMessage = _addMessage;
         $scope.isAuthor = _isAuthor;
-        $scope.openEmojisDialog = _openEmojisDialog;
 
         // watches and events
 
@@ -31,6 +30,17 @@
         });
 
         // #region private functions
+
+        function _onMessagesLoaded(messages) {
+            _syncUpdates(messages);
+            _prepareMessages(messages);
+        }
+
+        function _prepareMessages(messages) {
+            messages.forEach(function (message) {
+                message.text = $sce.trustAsHtml(message.text);
+            });
+        }
 
         // todo: rewrite to sockets
         function _syncUpdates(res) {
@@ -51,16 +61,6 @@
 
         function _isAuthor(message) {
             return message.isAuthor = (currentUser.email === message.author.email);
-        }
-
-        function _openEmojisDialog(event) {
-            $mdDialog.show({
-                controller: 'EmojisController',
-                templateUrl: 'app/components/emojis/emojis.html',
-                targetEvent: event
-            }).then(function (answer) {
-                $scope.newMessage.concat(" " + answer);
-            });
         }
     }
 })();
