@@ -43,7 +43,7 @@ function _init(app) {
 
 function _prod(app) {
     return function () {
-        console.log("Server was running under production mode: " + path.join(config.root, 'dist', 'public'));
+        console.log("Server was running under production mode: " + path.join(config.root, 'public'));
         app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
         app.use(express.static(path.join(config.root, 'public')));
         app.set('appPath', config.root + '/public');
