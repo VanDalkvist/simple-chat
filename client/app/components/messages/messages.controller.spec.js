@@ -18,7 +18,7 @@ describe('Controller: MessagesCtrl', function () {
             .respond({name: 'test'});
 
         $httpBackend.when('GET', '/api/messages')
-            .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+            .respond([{text:'HTML5 Boilerplate'}, {text: 'AngularJS'}, {text: 'Karma'}, {text: 'Express'}]);
 
         scope = $rootScope.$new();
         MessagesCtrl = $controller('MessagesCtrl', {

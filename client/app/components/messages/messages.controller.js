@@ -8,6 +8,7 @@
     MessagesCtrl.$inject = ['$scope', '$sce', 'Messages', 'emojis', 'currentUser', 'connection'];
 
     function MessagesCtrl($scope, $sce, Messages, emojis, currentUser, connection) {
+
         // #region init
 
         var author = currentUser && {name: currentUser.name, email: currentUser.email};
