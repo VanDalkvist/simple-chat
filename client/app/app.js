@@ -33,14 +33,13 @@ angular.module('simple-chat.app', [
                 return config;
             },
 
-            // Intercept 401s and redirect you to login
+            // Intercept 401 and 403 errors and redirect you to login
             responseError: function (response) {
                 if (response.status !== 401 && response.status !== 403) {
                     return $q.reject(response);
                 }
                 // remove any stale tokens
-                //$rootScope.user = undefined;
-                $log.log("responseError 401: Redirect to login page. Remove token from cookies.");
+                $log.log("responseError %d: Redirect to login page. Remove token from cookies.", response.status);
                 $location.path('/login');
                 $cookieStore.remove('token');
                 return $q.reject(response);
@@ -72,7 +71,7 @@ angular.module('simple-chat.app', [
             }
         }
     ])
-    .run(function ($rootScope, $log, $state, AuthHandler) {
+    .run(function ($rootScope, $log, $state, $cookieStore, AuthHandler) {
         $log.log("app: Subscribe to $stateChangeStart.");
 
         // handle any route related errors (specifically used to check for hidden resolve errors)
@@ -80,7 +79,10 @@ angular.module('simple-chat.app', [
             $log.log('$stateChangeError: ', error);
 
             // todo: prepare token, current user
-            if (error.status === 401) $state.go('login');
+            if (error.status === 401 || error.status === 403) {
+                $cookieStore.remove('token');
+                $state.go('login');
+            }
         });
 
         AuthHandler.start(30000);
