@@ -52,14 +52,36 @@ angular.module('simple-chat.app', [
             directRoutes: ['login']
         };
     })())
-    .run(function ($rootScope, $log, $state) {
+    .service('AuthHandler', ['$interval', '$log', 'User',
+        function AuthHandler($interval, $log, User) {
+
+            // public functions
+
+            this.start = _start;
+
+            // private functions
+
+            function _start(interval) {
+                interval = angular.isNumber(interval) ? interval : 10000;
+
+                $interval(function () {
+                    $log.log("AuthHandler: checking user is logged in or not.");
+
+                    User.get();
+                }, interval);
+            }
+        }
+    ])
+    .run(function ($rootScope, $log, $state, AuthHandler) {
         $log.log("app: Subscribe to $stateChangeStart.");
 
         // handle any route related errors (specifically used to check for hidden resolve errors)
-        $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error){
+        $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
             $log.log('$stateChangeError: ', error);
 
             // todo: prepare token, current user
             if (error.status === 401) $state.go('login');
         });
+
+        AuthHandler.start(30000);
     });
