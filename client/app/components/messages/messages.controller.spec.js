@@ -17,17 +17,25 @@ describe('Controller: MessagesCtrl', function () {
         $httpBackend.when('GET', '/api/users/me')
             .respond({name: 'test'});
 
-        $httpBackend.when('GET', '/api/messages')
-            .respond([{text:'HTML5 Boilerplate'}, {text: 'AngularJS'}, {text: 'Karma'}, {text: 'Express'}]);
-
         scope = $rootScope.$new();
         MessagesCtrl = $controller('MessagesCtrl', {
-            $scope: scope, currentUser: {email: 'email'}, connection: {sync: function(){}, unsync: function(){}}
+            $scope: scope,
+            currentUser: {email: 'email'},
+            connection: {
+                sync: function () {
+                },
+                unsync: function () {
+                },
+                socket: {
+                    emit: function (event, data, cb) {
+                        cb([{text: 'HTML5 Boilerplate'}, {text: 'AngularJS'}, {text: 'Karma'}, {text: 'Express'}]);
+                    }
+                }
+            }
         });
     }));
 
     it('should attach a list of messages to the scope', function () {
-        $httpBackend.flush();
         expect(scope.messages.length).toBe(4);
     });
 });
