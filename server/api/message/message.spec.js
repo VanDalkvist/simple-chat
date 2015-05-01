@@ -40,19 +40,4 @@ describe('GET /api/messages', function () {
             done();
         });
     });
-
-    it('should respond with JSON array', function (done) {
-        var reg = request.get('/api/messages');
-        agent.attachCookies(reg);
-        reg
-            .set({'Authorization': 'Bearer ' + token})
-            .expect(200)
-            .expect('Content-Type', /json/)
-            .end(function (err, res) {
-                if (err) return done(err);
-                res.body.should.be.instanceof(Array);
-
-                done();
-            });
-    });
 });
