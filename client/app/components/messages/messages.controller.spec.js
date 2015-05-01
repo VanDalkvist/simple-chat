@@ -6,16 +6,13 @@ describe('Controller: MessagesCtrl', function () {
     beforeEach(module('simple-chat.app'));
     beforeEach(module('socketMock'));
 
-    var MessagesCtrl,
-        scope,
-        $httpBackend;
+    var MessagesCtrl, scope, $httpBackend;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
         $httpBackend = _$httpBackend_;
 
-        $httpBackend.when('GET', '/api/users/me')
-            .respond({name: 'test'});
+        $httpBackend.when('GET', '/api/users/me').respond({name: 'test'});
 
         scope = $rootScope.$new();
         MessagesCtrl = $controller('MessagesCtrl', {
