@@ -36,11 +36,6 @@ angular.module('simple-chat.app').run(['$templateCache', function($templateCache
   );
 
 
-  $templateCache.put('app/core/modal/modal.html',
-    "<div class=modal-header><button ng-if=modal.dismissable type=button ng-click=$dismiss() class=close>&times;</button><h4 ng-if=modal.title ng-bind=modal.title class=modal-title></h4></div><div class=modal-body><p ng-if=modal.text ng-bind=modal.text></p><div ng-if=modal.html ng-bind-html=modal.html></div></div><div class=modal-footer><button ng-repeat=\"button in modal.buttons\" ng-class=button.classes ng-click=button.click($event) ng-bind=button.text class=btn></button></div>"
-  );
-
-
   $templateCache.put('app/main/main.html',
     "<md-content><div ng-controller=NavigationCtrl><include view=\"'app/navigation/header.html'\"></include><include view=\"'app/navigation/sidebar.html'\"></include></div><div flex=flex ui-view=content></div></md-content>"
   );

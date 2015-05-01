@@ -3,15 +3,6 @@
 
     angular.module('simple-chat.app')
         .factory('Auth', function Auth($http, $log, $cookieStore, $q, User) {
-            //$rootScope.user = {};
-            //if ($cookieStore.get('token')) {
-            //    $log.log("Auth: Token was found. Try to load user info.");
-            //
-            //    $rootScope.user = User.get(function () {
-            //        $log.log("Auth: Current user was loaded.");
-            //    });
-            //}
-
             return {
 
                 /**
@@ -29,9 +20,6 @@
                         success(function (data) {
                             $cookieStore.put('token', data.token);
                             $log.log("Auth - login: Success login.");
-                            //$rootScope.user = User.get(function () {
-                            //    $log.log("Auth - login: Current user was loaded.");
-                            //});
                             deferred.resolve(data);
                         }).
                         error(function (err) {
@@ -49,7 +37,6 @@
                 logout: function () {
                     $cookieStore.remove('token');
                     $log.log("Auth - logout: Reset user. Remove token.");
-                    //$rootScope.user = {};
                 },
 
                 /**
@@ -67,8 +54,9 @@
                  * @return {Boolean}
                  */
                 isAdmin: function () {
-                    return User.isAdmin().$promise;
-                    //return $rootScope.user ? $rootScope.user.role === 'admin' : false;
+                    return User.isAdmin().$promise.then(function (res) {
+                        return res.isAdmin;
+                    });
                 },
 
                 /**

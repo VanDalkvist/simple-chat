@@ -80,7 +80,7 @@ exports.changePassword = function (req, res, next) {
 };
 
 exports.isAdmin = function _isAdmin(req, res, next) {
-    res.send(req.user.role == 'admin');
+    res.json({isAdmin: req.user.role === 'admin'});
 };
 
 /**

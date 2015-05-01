@@ -20,7 +20,10 @@
                             return socket.connect();
                         }],
                         loginModel: ['$q', 'Auth', 'currentUser', function ($q, Auth, currentUser) {
-                            return $q.when({isLoggedIn: true, isAdmin: $q.when(Auth.isAdmin())});
+                            var isAdminPromise = Auth.isAdmin();
+                            return isAdminPromise.then(function (isAdmin) {
+                                return $q.all({isLoggedIn: true, isAdmin: isAdmin});
+                            });
                         }]
                     }
                 });
