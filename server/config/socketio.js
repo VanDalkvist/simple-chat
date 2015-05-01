@@ -43,7 +43,7 @@ function _init(socketio) {
         });
 
         // Call _onConnect.
-        _onConnect(socket);
+        _onConnect(socket, socketio);
         console.info('[%s] CONNECTED', socket.address);
     });
 }
@@ -57,12 +57,12 @@ function _onDisconnect(socket) {
 /**
  * When the user connects.. perform this
  */
-function _onConnect(socket) {
+function _onConnect(socket, io) {
     // When the client emits 'info', this listens and executes
     socket.on('info', function (data) {
         console.info('[%s] %s', socket.address, JSON.stringify(data, null, 2));
     });
 
     // Insert sockets below
-    require('../api/message/message.socket').register(socket);
+    require('../api/message/message.socket').register(socket, io);
 }

@@ -14,7 +14,7 @@ angular.module('simple-chat.app')
         // private functions
 
         function _connect() {
-            if (socket) return socketConnection;
+            if (!!socket) return socketConnection;
 
             $log.log("socket: initialization");
 
@@ -28,7 +28,7 @@ angular.module('simple-chat.app')
 
             socket = socketFactory({ioSocket: ioSocket});
 
-            return socketConnection;
+            return angular.extend(socketConnection, {socket: socket});
         }
 
         /**
@@ -45,7 +45,7 @@ angular.module('simple-chat.app')
             /**
              * Syncs item creation/updates on 'model:save'
              */
-            socket.on(modelName + ':save', function (item) {
+            socket.on(modelName + ':saved', function (item) {
                 var oldItem = _.find(array, {_id: item._id});
                 var index = array.indexOf(oldItem);
                 var event = 'created';
@@ -66,7 +66,7 @@ angular.module('simple-chat.app')
             /**
              * Syncs removed items on 'model:remove'
              */
-            socket.on(modelName + ':remove', function (item) {
+            socket.on(modelName + ':removed', function (item) {
                 var event = 'deleted';
                 _.remove(array, {_id: item._id});
                 cb(event, item, array);
@@ -78,7 +78,7 @@ angular.module('simple-chat.app')
          * @param modelName
          */
         function _unsyncUpdates(modelName) {
-            socket.removeAllListeners(modelName + ':save');
-            socket.removeAllListeners(modelName + ':remove');
+            socket.removeAllListeners(modelName + ':saved');
+            socket.removeAllListeners(modelName + ':removed');
         }
     });

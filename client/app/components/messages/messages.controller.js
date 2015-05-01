@@ -19,7 +19,12 @@
             return {name: emoji.substr(1, emoji.length - 2)};
         });
 
-        $scope.messages = Messages.query(_onMessagesLoaded, _unsyncUpdates);
+        $scope.messages = [];
+
+        connection.socket.emit('message:fetch-all', {}, function (messages) {
+            _onMessagesLoaded(messages);
+        });
+        //$scope.messages = Messages.query(_onMessagesLoaded, _unsyncUpdates);
 
         $scope.addMessage = _addMessage;
         $scope.isAuthor = _isAuthor;
@@ -33,8 +38,10 @@
         // #region private functions
 
         function _onMessagesLoaded(messages) {
-            _syncUpdates(messages);
-            _prepareMessages(messages);
+            $scope.messages = messages;
+
+            _syncUpdates($scope.messages);
+            _prepareMessages($scope.messages);
         }
 
         function _prepareMessages(messages) {
@@ -43,7 +50,6 @@
             });
         }
 
-        // todo: rewrite to sockets
         function _syncUpdates(res) {
             connection.sync('message', $scope.messages);
         }
@@ -52,12 +58,16 @@
             connection.unsync('message');
         }
 
-        // todo: rewrite to sockets
         function _addMessage(newMessage) {
             if (newMessage === '') return;
 
-            Messages.save({text: newMessage, createdAt: moment().toDate(), author: author});
-            $scope.newMessage = '';
+            connection.socket.emit('message:save', {
+                text: newMessage,
+                createdAt: moment().toDate(),
+                author: author
+            }, function (message) {
+                $scope.newMessage = '';
+            });
         }
 
         function _isAuthor(message) {
