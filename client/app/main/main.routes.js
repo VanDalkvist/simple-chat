@@ -16,8 +16,14 @@
                         currentUser: ['User', function (User) {
                             return User.get().$promise;
                         }],
-                        connection: ['socket', 'currentUser', function (socket, currentUser) {
-                            return socket.connect();
+                        connection: ['socket', 'PresenceHandler', 'currentUser', function (socket, PresenceHandler, currentUser) {
+                            var connection = socket.connect();
+                            PresenceHandler.start(10000, function () {
+                                connection.socket.emit('user:on', {name: currentUser.name});
+                            }, function () {
+                                connection.socket.emit('user:out', {name: currentUser.name});
+                            });
+                            return connection;
                         }],
                         loginModel: ['$q', 'Auth', 'currentUser', function ($q, Auth, currentUser) {
                             var isAdminPromise = Auth.isAdmin();

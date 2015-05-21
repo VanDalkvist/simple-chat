@@ -71,6 +71,57 @@ angular.module('simple-chat.app', [
             }
         }
     ])
+    .service('PresenceHandler', ['$interval', '$log',
+        function PresenceHandler($interval, $log) {
+
+            // public functions
+
+            this.start = _start;
+
+            // private functions
+
+            var isVisible = (function () {
+                var stateKey,
+                    eventKey,
+                    keys = {
+                        hidden: "visibilitychange",
+                        webkitHidden: "webkitvisibilitychange",
+                        mozHidden: "mozvisibilitychange",
+                        msHidden: "msvisibilitychange"
+                    };
+                for (stateKey in keys) {
+                    if (stateKey in document) {
+                        eventKey = keys[stateKey];
+                        break;
+                    }
+                }
+                return function (callback) {
+                    if (callback) document.addEventListener(eventKey, callback);
+                    return !document[stateKey];
+                }
+            })();
+
+            function _start(interval, visibleCallback, invisibleCallback) {
+                interval = angular.isNumber(interval) ? interval : 100000;
+
+                isVisible(function _subscribeVisibilityEvents() {
+                    var intervalId = $interval(function () {
+                        $log.log("PresenceHandler: checking user is online or not.");
+
+                        var visible = isVisible();
+                        if (visible) {
+                            console.log("tab is visible - has focus");
+                            visibleCallback && visibleCallback();
+                        }
+                        else {
+                            console.log("tab is invisible");
+                            invisibleCallback && invisibleCallback();
+                        }
+                    }, interval);
+                });
+            }
+        }
+    ])
     .run(function ($rootScope, $log, $state, $cookieStore, AuthHandler) {
         $log.log("app: Subscribe to $stateChangeStart.");
 
@@ -78,7 +129,6 @@ angular.module('simple-chat.app', [
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
             $log.log('$stateChangeError: ', error);
 
-            // todo: prepare token, current user
             if (error.status === 401 || error.status === 403) {
                 $cookieStore.remove('token');
                 $state.go('login');

@@ -39,6 +39,7 @@ function _init(socketio) {
         // Call _onDisconnect.
         socket.on('disconnect', function () {
             _onDisconnect(socket);
+            //socket.on('user:off');
             console.info('[%s] DISCONNECTED', socket.address);
         });
 
@@ -65,4 +66,5 @@ function _onConnect(socket, io) {
 
     // Insert sockets below
     require('../api/message/message.socket').register(socket, io);
+    require('../api/user/user.socket').register(socket, io);
 }
